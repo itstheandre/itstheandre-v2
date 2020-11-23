@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { gray900 } from "../utils/gray";
+import { gray900 } from "../utils/custom.colors";
 
 interface BurgerProps {
   open: boolean;

@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import styled from "@emotion/styled";
 import Head from "next/head";
 import { Project } from "../components";
 import { useIsMedium } from "../hooks";
