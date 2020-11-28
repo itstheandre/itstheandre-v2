@@ -1,56 +1,43 @@
-import { Box, Heading, Text, useColorMode } from "@chakra-ui/react";
+import { Box, ColorMode, Heading, Text, useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { gray900 } from "../../theme/utils/custom.colors";
+import { brandMain, gray900 } from "../../theme/utils/custom.colors";
 import styled from "@emotion/styled";
-import { StrokeHeading, StrokeLink } from "../../theme/custom/stroke.text";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { NextLink } from "../Common";
 
 interface ProjectProps {
   isLast?: boolean;
+  slug?: string;
+  name?: string;
 }
 
-export const Project: React.FC<ProjectProps> = ({ isLast = false }) => {
+export const Project: React.FC<ProjectProps> = ({
+  isLast = false,
+  name = "Savorly",
+  slug,
+}) => {
   const { colorMode } = useColorMode();
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     const test = /webkit/gi.test(navigator.userAgent);
-  //     const isMobileDevice = /Mobi/gi.test(navigator.userAgent);
-  //     setIsWebkit(test);
-  //     setIsMobile(isMobileDevice);
-  //   }
-  // }, []);
+  console.log("isLast:", isLast);
 
   return (
-    <Box
-      borderTop="1px solid white"
-      borderBottom={isLast ? "1px solid white" : "0"}
-      // _hover={{ color: "brand.main" }}
-      // bg="blue.900"
-      py={{ base: "3.5em", lg: "32" }}
-    >
+    <NextLink href={`/work/${slug}`} _hover={{ textDecor: "none" }}>
       <Box
-        // bg="blue.900"
-        mx={{ base: "0", lg: "7.75em", xl: "7em" }}
-        // my={{ base: "3.5em", lg: "32" }}
-        textAlign="center"
+        borderBottom={isLast ? "1px solid white" : "0"}
+        borderColor={colorMode === "dark" ? "white" : "gray.900"}
+        borderBottomWidth={isLast ? "1px" : "0"}
+        borderTopWidth="1px"
+        className="strokeWrapper"
+        py={{ base: "3.5em", lg: "32" }}
       >
-        {/* <StrokeLink textDecor="none" colorMode={colorMode}>
-          Test
-        </StrokeLink> */}
-        <StrokeHeading
-          colorMode={colorMode}
-          as="h4"
-          fontSize="4xl"
-          mb={1}
-          _hover={{ cursor: "pointer" }}
-          // _hover={{ color: "brand.main", cursor: "pointer" }}
-        >
-          Savorly
-        </StrokeHeading>
-        {/* <Heading as="h4" fontSize="4xl" css={obj} mb={1}>
-          Savorly
-        </Heading> */}
-        <Text size="sm">🛒 E-commerce website</Text>
+        <Box mx={{ base: "0", lg: "7.75em", xl: "7em" }} textAlign="center">
+          <Heading as="h4" className="stroke" fontSize="4xl" mb={1}>
+            {name}
+          </Heading>
+
+          <Text size="sm">🛒 E-commerce website</Text>
+        </Box>
       </Box>
-    </Box>
+    </NextLink>
   );
 };

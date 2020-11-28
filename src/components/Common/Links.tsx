@@ -1,26 +1,39 @@
-import { ComponentWithAs, Link } from "@chakra-ui/react";
-import NLink, { LinkProps } from "next/link";
-import { FC, useEffect, useState } from "react";
+import { Link, LinkProps as ChakraLinkProps } from "@chakra-ui/react";
+import NLink, { LinkProps as NextLinkProps } from "next/link";
+import { FC, PropsWithChildren, useEffect, useState } from "react";
 
 export type Mapped<T> = {
   readonly [P in keyof T]?: T[P];
 };
-type Me = Mapped<ComponentWithAs<"a", LinkProps>> & {
-  href: string;
-};
 
-type NextLinkProps = Mapped<ComponentWithAs<"a", LinkProps>> & {
+type NextLinkProps2 = ChakraLinkProps & {
   href?: string;
 };
 
-export const NextLink: FC<NextLinkProps> = ({
+// const props: LinkProps = {
+//   text,
+// };
+
+export type NextChakraLinkProps = PropsWithChildren<
+  NextLinkProps & ChakraLinkProps
+>;
+
+export const NextLink: FC<NextChakraLinkProps> = ({
   href = "/",
+  as,
+  replace,
+  scroll,
+  shallow,
+  prefetch,
   children,
-  ...rest
+  ...chakraProps
 }) => {
   return (
-    <NLink href={href}>
-      <Link {...rest}>{children}</Link>
+    <NLink passHref href={href}>
+      <Link {...chakraProps}>{children}</Link>
+      {/* <Link  as="span">
+        <a>{children}</a>
+      </Link> */}
     </NLink>
   );
 };

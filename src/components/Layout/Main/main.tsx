@@ -8,7 +8,7 @@ export const Main: React.FC<BodyProps> = ({ children }) => {
     <Box
       as="main"
       mx="auto"
-      maxW={{ base: "90%", sm: "30em", md: "46em", lg: "61em", xl: "77em" }}
+      maxW={{ base: "90%", sm: "28em", md: "46em", lg: "61em", xl: "77em" }}
     >
       {children}
     </Box>

@@ -25,7 +25,7 @@ export const Nav = () => {
     <Grid
       mt={5}
       h={12}
-      templateColumns={isMedium ? "repeat(3, 1fr)" : "auto 1fr auto"}
+      templateColumns="repeat(3,1fr)"
       // templateColumns="auto 1fr auto"
       gridColumnGap={2}
       justifyContent="center"
