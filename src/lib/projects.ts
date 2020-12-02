@@ -50,3 +50,25 @@ export function getSortedProjects() {
     return (b as any).order - (a as any).order;
   });
 }
+
+export const getAllProjectSlugs = () => {
+  const fileNames = fs.readdirSync(projectsDir);
+  // const slug = el.replace(/[\d_]+|.mdx/g, "");
+
+  return fileNames.map((el) => ({
+    params: {
+      project: el.replace(/[\d_]+|.mdx/g, ""),
+    },
+  }));
+};
+
+export const getProjectData = (project: string) => {
+  const pathOfProjects = fs.readdirSync(projectsDir);
+  const singleProject = pathOfProjects.find((e) =>
+    e.toLowerCase().includes(project.toLowerCase())
+  );
+  const fullPath = join(projectsDir, singleProject);
+  const projectContent = fs.readFileSync(fullPath, "utf-8");
+
+  return projectContent;
+};

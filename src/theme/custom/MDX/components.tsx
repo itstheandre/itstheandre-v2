@@ -6,6 +6,7 @@ export const mdxComponents = {
     <ChakraCode bg="gray.300" {...props} />
     // <code style={{ backgroundColor: "lightgrey" }} {...props}></code>
   ),
+  p: (props) => <p style={{ width: "100%" }} {...props} />,
   pre: ({ children: { props } }) => {
     if (props.mdxType === "code") {
       return (
