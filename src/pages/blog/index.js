@@ -3,8 +3,6 @@ import Link from "next/link";
 import { getSortedPosts } from "../../lib/posts";
 
 const BlogIndex = ({ allPostsData }) => {
-  console.log("allPostsData:", allPostsData);
-
   return (
     <>
       <Box sx={{ variant: "containers.page" }}>

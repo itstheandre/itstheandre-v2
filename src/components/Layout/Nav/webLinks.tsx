@@ -1,5 +1,6 @@
 export const webLinks = [
-  { url: "/components", text: "Components Page" },
+  { url: "/about", text: "About" },
   { url: "/work", text: "Work" },
-  { url: "/login", text: "Login" },
+  { url: "/blog", text: "Blog" },
+  { url: "/contact", text: "Contact" },
 ];

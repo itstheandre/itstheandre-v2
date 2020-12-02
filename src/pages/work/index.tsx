@@ -3,55 +3,74 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import { LetsWork, PageHeader, Project } from "../../components";
+import {
+  LetsWork,
+  PageHeader,
+  PageHero,
+  PageIntro,
+  Project,
+} from "../../components";
 import { useIsMedium } from "../../hooks";
 import { getSortedProjects } from "../../lib/projects";
 
+type Projects = "frontend" | "backend" | "apps" | "all";
+
 export default function Work({ projects }) {
-  console.log("props:", projects);
   const isMedium = useIsMedium();
   const [isSelected, setIsSelected] = useState(true);
+  const [selected, setSelected] = useState<Projects>("all");
   return (
     <>
       <Head>
         <title>My works</title>
       </Head>
       <PageHeader>
-        <Heading variant="mono" as="h5" mb={1} fontSize={{ base: "1em" }}>
-          Work 💻
-        </Heading>
-        <Heading
-          as="h2"
-          fontSize={{ base: "2xl", sm: "3xl", lg: "5xl", xl: "6xl" }}
-        >
+        <PageIntro>Work 💻</PageIntro>
+        <PageHero>
           You can filter these projects by{" "}
-          <Text cursor="pointer" as="span" className="strokerText stroke">
+          <Text
+            cursor="pointer"
+            as="span"
+            onClick={() => setSelected("frontend")}
+            className={selected === "frontend" ? "" : "strokerText stroke"}
+            color={selected === "frontend" ? "brand.main" : ""}
+          >
             front-end
           </Text>
           ,{" "}
-          <Text cursor="pointer" as="span" className="strokerText stroke">
+          <Text
+            cursor="pointer"
+            as="span"
+            onClick={() => setSelected("backend")}
+            className={selected === "backend" ? "" : "strokerText stroke"}
+            color={selected === "backend" ? "brand.main" : ""}
+          >
             back-end
           </Text>
           ,{" "}
-          <Text cursor="pointer" as="span" className="strokerText stroke">
+          <Text
+            cursor="pointer"
+            as="span"
+            onClick={() => setSelected("apps")}
+            className={selected === "apps" ? "" : "strokerText stroke"}
+            color={selected === "apps" ? "brand.main" : ""}
+          >
             apps
           </Text>
           , or just check{" "}
           <Text
             cursor="pointer"
             as="span"
-            className={isSelected ? "" : "strokerText stroke"}
-            color="brand.main"
+            onClick={() => setSelected("all")}
+            className={selected === "all" ? "" : "strokerText stroke"}
+            color={selected === "all" ? "brand.main" : ""}
           >
             all of them at once
           </Text>
-        </Heading>
+        </PageHero>
       </PageHeader>
 
       {projects.map((el, i, { length }) => {
-        console.log("i:", i);
-        console.log("length:", length);
-        console.log(i === length - 1);
         return (
           <Project
             key={el.slug}
@@ -74,7 +93,6 @@ export default function Work({ projects }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const projects = getSortedProjects();
-  console.log("projects:", projects);
 
   return {
     props: {

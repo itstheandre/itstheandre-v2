@@ -5,7 +5,7 @@ import { styles } from "./styles";
 import { components } from "./overrides";
 import { mode } from "@chakra-ui/theme-tools";
 
-import { TTMonoBold } from "./utils/fonts";
+import { TTMonoBold, TTRegBold } from "./utils/fonts";
 
 export const theme = extendTheme({
   colors,
@@ -13,6 +13,16 @@ export const theme = extendTheme({
   config,
   components: {
     ...components,
+    Link: {
+      baseStyle: {
+        _hover: {
+          textDecoration: "none",
+        },
+        _focus: {
+          boxShadow: "none",
+        },
+      },
+    },
   },
 });
 

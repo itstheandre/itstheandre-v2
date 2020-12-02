@@ -10,15 +10,17 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { GetStaticProps } from "next";
+import { useState } from "react";
 import { AboutWrapper, LetsWork } from "../components";
 import { myIcons } from "../Icons";
 import { ReactIcon } from "../Icons/React.icon";
-import { getSingleProject } from "../lib/projects";
 import { TTMonoBold, TTRegBold } from "../theme/utils/fonts";
+
+type TechUsed = "all" | "frontend" | "backend" | "lib";
 
 export default function About() {
   const { colorMode } = useColorMode();
+  const [techUsed, setTechUsed] = useState<TechUsed>("all");
 
   const greetings = colorMode === "dark" ? "Hello world" : "My eyes!*";
   return (
@@ -97,10 +99,34 @@ export default function About() {
         </Text>
       </Box>
       <Flex mt={12} justifyContent="space-between" fontSize="0">
-        <Badge variant="selected">All</Badge>
-        <Badge>Front-End</Badge>
-        <Badge>Back-End</Badge>
-        <Badge>Libraries</Badge>
+        <Badge
+          d="flex"
+          variant={techUsed === "all" ? "selected" : "unselected"}
+          onClick={() => setTechUsed("all")}
+        >
+          All
+        </Badge>
+        <Badge
+          d="flex"
+          variant={techUsed === "frontend" ? "selected" : "unselected"}
+          onClick={() => setTechUsed("frontend")}
+        >
+          Front-End
+        </Badge>
+        <Badge
+          d="flex"
+          variant={techUsed === "backend" ? "selected" : "unselected"}
+          onClick={() => setTechUsed("backend")}
+        >
+          Back-End
+        </Badge>
+        <Badge
+          d="flex"
+          variant={techUsed === "lib" ? "selected" : "unselected"}
+          onClick={() => setTechUsed("lib")}
+        >
+          Libraries
+        </Badge>
       </Flex>
       <Wrap spacing="24px" justify="center" mt={16}>
         {myIcons.map((Comp, i) => (

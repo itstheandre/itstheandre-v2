@@ -31,9 +31,6 @@ export const NextLink: FC<NextChakraLinkProps> = ({
   return (
     <NLink passHref href={href}>
       <Link {...chakraProps}>{children}</Link>
-      {/* <Link  as="span">
-        <a>{children}</a>
-      </Link> */}
     </NLink>
   );
 };

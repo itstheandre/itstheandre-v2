@@ -6,7 +6,7 @@ export const NameLink = () => {
   const [isMedium] = useMediaQuery("(min-width: 768px)");
 
   return (
-    <Box textAlign={isMedium ? "start" : "center"}>
+    <Box textAlign={isMedium ? "left" : "center"}>
       <NextLink href="/" _hover={{ textDecor: "none" }}>
         <Heading as="h5" fontSize="1em" variant="mono">
           André{" "}

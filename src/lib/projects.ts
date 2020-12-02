@@ -19,7 +19,7 @@ export function getSortedProjects() {
   const fileNames = fs.readdirSync(projectsDir);
 
   const allProjectsData = fileNames.map((el) => {
-    const slug = el.replace(".mdx", "");
+    const slug = el.replace(/[\d_]+|.mdx/g, "");
 
     const fullPath = join(projectsDir, el);
 

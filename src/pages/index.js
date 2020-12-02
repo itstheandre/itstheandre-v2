@@ -1,14 +1,19 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import Head from "next/head";
-import { LetsWork, Project } from "../components";
+import {
+  LetsWork,
+  NextLink,
+  PageHero,
+  PageIntro,
+  Project,
+} from "../components";
 import { useIsMedium } from "../hooks";
-import { getSortedPosts } from "../lib/posts";
+import { getSortedProjects } from "../lib/projects";
 import { TTReg, TTRegBold } from "../theme/utils/fonts";
 import { PageHeader } from "../components";
 
-export default function Home({ posts }) {
-  console.log("posts:", posts);
+export default function Home({ projects }) {
   const isMedium = useIsMedium();
 
   return (
@@ -18,13 +23,8 @@ export default function Home({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageHeader homePage>
-        <Heading variant="mono" as="h5" mb={1} fontSize={{ base: "1em" }}>
-          Hello 👋
-        </Heading>
-        <Heading
-          as="h2"
-          fontSize={{ base: "3xl", sm: "4xl", lg: "5xl", xl: "6xl" }}
-        >
+        <PageIntro>Hello 👋</PageIntro>
+        <PageHero>
           I'm André and I'm a full stack developer. Code has become my life to
           the point that{" "}
           <Text as="span" className="strokerText stroke">
@@ -38,15 +38,25 @@ export default function Home({ posts }) {
           <Text as="span" className="strokerText stroke">
             dream it
           </Text>
-        </Heading>
+        </PageHero>
       </PageHeader>
-      <Project />
-      <Project />
-      <Project isLast={true} />
+      {projects.map((el, i, { length }) => {
+        return (
+          <Project
+            key={el.slug}
+            slug={el.slug}
+            name={el.title}
+            isLast={i === length - 1}
+          />
+        );
+      })}
+
       <Flex mt={10} justifyContent="center">
-        <Button variant="outline" textAlign="center">
-          Check all Projects
-        </Button>
+        <NextLink href="/work" textDecor="none" _hover={{ textDecor: "none" }}>
+          <Button variant="outline" textAlign="center">
+            Check all Projects
+          </Button>
+        </NextLink>
       </Flex>
       <LetsWork />
     </div>
@@ -54,11 +64,11 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-  const data = getSortedPosts();
+  const projects = getSortedProjects();
 
   return {
     props: {
-      posts: data,
+      projects,
     },
   };
 }

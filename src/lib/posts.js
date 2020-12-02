@@ -25,7 +25,6 @@ export const getSortedPosts = () => {
       ...data,
       date: formattedDate,
     };
-    console.log(readingTime(content));
     return {
       slug,
       ...frontmatter,
@@ -57,7 +56,6 @@ export const getAllPostSlugs = () => {
 export const getPostData = async (slug) => {
   const fullPath = path.join(postsDir, `${slug}.mdx`);
   const postContent = fs.readFileSync(fullPath, "utf8");
-  console.log("postContent:", postContent);
 
   return postContent;
 };

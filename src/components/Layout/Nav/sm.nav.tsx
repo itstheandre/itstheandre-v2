@@ -1,11 +1,13 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, useDisclosure } from "@chakra-ui/react";
 import { BurgerMenu } from "./burgermenu";
 import { NameLink } from "./name";
 
-export const SmNav = () => (
-  <>
-    <BurgerMenu />
-    <NameLink />
-  </>
-);
+export const SmNav = () => {
+  return (
+    <>
+      <BurgerMenu />
+      <NameLink />
+    </>
+  );
+};

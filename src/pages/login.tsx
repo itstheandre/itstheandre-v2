@@ -28,9 +28,7 @@ function Login() {
   // const [loginMutation, { data }] = useLoginMutation();
   const { register, handleSubmit } = useForm({ defaultValues: { email: "" } });
 
-  const onSubmit = handleSubmit(async (e) => {
-    console.log(e);
-  });
+  const onSubmit = handleSubmit(async (e) => {});
   return (
     <Box h="100vh">
       <Heading as="h1">Hello</Heading>

@@ -1,30 +1,54 @@
 import {
   Box,
   Button,
+  createStandaloneToast,
   Flex,
   FormControl,
   FormLabel,
   Heading,
   Input,
   useColorMode,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { NextLink, PageHeader } from "../components";
+import {
+  CustomToast,
+  NextLink,
+  PageHeader,
+  PageHero,
+  PageIntro,
+} from "../components";
 import { TTMonoBold, TTRegBold } from "../theme/utils/fonts";
 
 export default function Contact() {
   const { colorMode } = useColorMode();
-  const { handleSubmit, errors, register } = useForm();
+  const toast = useToast();
+  const myToast = createStandaloneToast({
+    defaultOptions: {
+      duration: 9000,
+    },
+  });
+
+  const { handleSubmit, errors, register } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+  console.log("errors:", errors);
+
+  const onSubmit = handleSubmit((e) => {
+    console.log("e:", e);
+    myToast({
+      render: () => <CustomToast status="success" />,
+    });
+  });
   return (
     <>
       <PageHeader>
-        <Heading variant="mongo" as="h5" mb={1} fontSize={{ base: "1em" }}>
-          Let's chat 💬
-        </Heading>
-        <Heading
-          as="h2"
-          fontSize={{ base: "3xl", sm: "4xl", lg: "5xl", xl: "6xl" }}
-        >
+        <PageIntro>Let's chat 💬</PageIntro>
+        <PageHero>
           If you have a project for me, or just want to grab a coffee and talk
           about Christopher Nolan, feel free to{" "}
           <NextLink
@@ -37,16 +61,23 @@ export default function Contact() {
             email me
           </NextLink>{" "}
           or just fill out this form.
-        </Heading>
+        </PageHero>
       </PageHeader>
+      {/* <form onSubmit={onSubmit}> */}
       <Box
         bg={colorMode === "dark" ? "gray.800" : "gray.50"}
-        h="80vh"
+        minHeight="80vh"
         borderRadius="20px"
-        p={8}
+        p={{ base: 8, sm: 10, md: 16, lg: 20 }}
         mb={24}
+        onSubmit={onSubmit}
+        as="form"
       >
-        <FormControl id="name" fontFamily={TTMonoBold}>
+        <FormControl
+          id="name"
+          fontFamily={TTMonoBold}
+          isInvalid={Boolean(errors.name)}
+        >
           <FormLabel>👋 What's your name?</FormLabel>
           <Input
             type="text"
@@ -58,21 +89,33 @@ export default function Contact() {
             mt="4"
             fontFamily={TTRegBold}
             borderBottomColor={colorMode === "dark" ? "white" : "gray.900"}
+            fontSize="20px"
             placeholder="Tell me your name"
             _placeholder={{
               color: colorMode === "dark" ? "gray.600" : "gray.300",
               textAlign: "left",
               fontSize: "20px",
             }}
+            _focus={{ outline: "none" }}
+            name="name"
+            ref={register}
+            // ref={register({
+            //   // validate: (str) => (!str ? "This is wrong" : true),
+            // })}
+            // ref={register}
           />
+          {/* <FormErrorMessage>
+              {errors.name && errors.name.message}
+            </FormErrorMessage> */}
         </FormControl>
-        <FormControl id="name" fontFamily={TTMonoBold} mt="3.5em">
+        <FormControl id="email" fontFamily={TTMonoBold} mt="3.5em">
           <FormLabel>💌 How can I reach out to you?</FormLabel>
           <Input
             type="text"
             border="none"
             borderBottom="1px"
             borderRadius="0"
+            fontSize="20px"
             py="2"
             px="0"
             mt="4"
@@ -84,9 +127,12 @@ export default function Contact() {
               textAlign: "left",
               fontSize: "20px",
             }}
+            _focus={{ outline: "none" }}
+            name="email"
+            ref={register}
           />
         </FormControl>
-        <FormControl id="name" fontFamily={TTMonoBold} mt="3.5em">
+        <FormControl id="message" fontFamily={TTMonoBold} mt="3.5em">
           <FormLabel>💬 What's your message?</FormLabel>
           <Input
             type="text"
@@ -95,6 +141,7 @@ export default function Contact() {
             borderRadius="0"
             py="2"
             px="0"
+            fontSize="20px"
             mt="4"
             fontFamily={TTRegBold}
             color="white"
@@ -105,12 +152,18 @@ export default function Contact() {
               textAlign: "left",
               fontSize: "20px",
             }}
+            _focus={{ outline: "none" }}
+            ref={register}
+            name="message"
           />
         </FormControl>
         <Flex mt={16} dir="column" justify="center">
-          <Button variant="outline">Send message</Button>
+          <Button variant="outline" type="submit">
+            Send message
+          </Button>
         </Flex>
       </Box>
+      {/* </form> */}
     </>
   );
 }
