@@ -1,12 +1,20 @@
 import { Code } from "./Code/CodeComponent";
-import { Code as ChakraCode } from "@chakra-ui/react";
+import { Code as ChakraCode, Heading, Text } from "@chakra-ui/react";
 
 export const mdxComponents = {
   "p.inlineCode": (props) => (
     <ChakraCode bg="gray.300" {...props} />
     // <code style={{ backgroundColor: "lightgrey" }} {...props}></code>
   ),
-  p: (props) => <p style={{ width: "100%" }} {...props} />,
+  // p: (props) => <p style={{ width: "100%" }} {...props} />,
+  h5: (props) => <Heading as="h5" {...props} />,
+  h3: (props) => (
+    <Heading as="h3" {...props} mb="4" mt="10" fontSize={{ base: "md" }} />
+  ),
+  h4: (props) => (
+    <Heading as="h4" mb="4" mt="10" {...props} fontSize={{ base: "lg" }} />
+  ),
+  p: (props) => <Text mb="4" {...props} />,
   pre: ({ children: { props } }) => {
     if (props.mdxType === "code") {
       return (
