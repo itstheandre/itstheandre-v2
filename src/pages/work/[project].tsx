@@ -1,13 +1,3 @@
-import matter from "gray-matter";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import renderToString from "next-mdx-remote/render-to-string";
-import hydrate from "next-mdx-remote/hydrate";
-
-import {
-  getAllProjectSlugs,
-  getProjectData,
-  getSlugs,
-} from "../../lib/projects";
 import {
   Badge,
   Box,
@@ -16,14 +6,18 @@ import {
   Grid,
   GridItem,
   Heading,
-  Text,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { TLDR } from "../../components/MDXComps";
-import { NextLink, PageHeader, PageHero, PageIntro } from "../../components";
-import { TTMonoBold } from "../../theme/utils/fonts";
+import matter from "gray-matter";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import hydrate from "next-mdx-remote/hydrate";
+import renderToString from "next-mdx-remote/render-to-string";
 import NextImage from "next/image";
+import { NextLink, PageHero, PageIntro } from "../../components";
+import { TLDR } from "../../components/MDXComps";
+import { getAllProjectSlugs, getProjectData } from "../../lib/projects";
+import { TTMonoBold } from "../../theme/utils/fonts";
 
 const components = {
   TLDR,
@@ -36,9 +30,15 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
   source,
   frontMatter,
 }) => {
-  console.log("frontMatter:", frontMatter);
-  console.log("source:", source);
+  // console.log("source:", source);
+  // console.log("frontMatter:", frontMatter);
+  // console.log("source:", source);
   const content = hydrate(source, { components });
+
+  console.log("content:", content);
+  if (true) {
+    return <h1>Loading ...</h1>;
+  }
   return (
     <Box>
       <Box mt="20">
@@ -119,6 +119,10 @@ export default IndividualProjects;
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllProjectSlugs();
   return {
+    fallback: false,
+    paths: [{ params: { project: "savorly" } }],
+  };
+  return {
     fallback: true,
     paths,
   };
@@ -126,10 +130,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postContent = getProjectData(params.project as string);
+  console.log("postContent:", postContent);
 
   const { data, content } = matter(postContent);
-  console.log("data:", data);
-
   const mdxSource = await renderToString(content, {
     components,
     scope: data,
