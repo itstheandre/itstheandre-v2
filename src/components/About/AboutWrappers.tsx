@@ -10,20 +10,25 @@ interface AboutWrapperProps {
 
 export function AboutWrapper({ emoji, title, children }: AboutWrapperProps) {
   return (
-    <Flex direction="column">
-      <Text textAlign="center" mb="2">
-        {emoji}
-      </Text>
+    <Flex
+      direction="column"
+      justify="center"
+      textAlign={{ base: "center", md: "left" }}
+    >
+      <Text mb="2">{emoji}</Text>
       <Heading
         as="h4"
         fontSize="5"
-        textAlign="center"
+        // textAlign="center"
         fontFamily={TTMonoBold}
         mb="2"
       >
         {title}
       </Heading>
-      <Text fontSize="4" textAlign="center">
+      <Text
+        fontSize="4"
+        // textAlign="center"
+      >
         {children}
       </Text>
     </Flex>

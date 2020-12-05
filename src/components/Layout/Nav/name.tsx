@@ -3,10 +3,9 @@ import { NextLink } from "../../Common/Links";
 import { TTMonoBold } from "../../../theme/utils/fonts";
 
 export const NameLink = () => {
-  const [isMedium] = useMediaQuery("(min-width: 768px)");
-
   return (
-    <Box textAlign={isMedium ? "left" : "center"}>
+    // <Box textAlign={isMedium ? "left" : "center"}>
+    <Box textAlign={{ base: "center", md: "left" }}>
       <NextLink href="/" _hover={{ textDecor: "none" }}>
         <Heading as="h5" fontSize="1em" variant="mono">
           André{" "}

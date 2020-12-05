@@ -6,17 +6,17 @@ import {
   ListItem,
   UnorderedList,
 } from "@chakra-ui/react";
-import { InfoIcon } from "@chakra-ui/icons";
 import { theme } from "../theme";
+import { InfoIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { Layout, Main, Nav } from "../components/";
 import { MDXProvider } from "@mdx-js/react";
 
-// const components = {
 //   "p.inlineCode": (props) => (
 //     <code style={{ backgroundColor: "lightgrey" }} {...props}></code>
 //   ),
-//   pre: ({ children: { props } }) => {
+  // pre: ({ children: { props } }) => {
+// const components = {
 //     if (props.mdxType === "code") {
 //       return (
 //         <Code
@@ -24,7 +24,7 @@ import { MDXProvider } from "@mdx-js/react";
 //           language={props.className && props.className.replace("language-", "")}
 //           {...props}
 //         />
-//       );
+      // );
 //     }
 //   },
 // };
