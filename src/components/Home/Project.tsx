@@ -42,7 +42,6 @@ export const Project: React.FC<ProjectProps> = ({
 }) => {
   const { colorMode } = useColorMode();
   const isLarge = useIsLarge();
-  console.log("isLarge:", isLarge);
 
   return (
     <NextLink href={`/work/${slug}`} _hover={{ textDecor: "none" }}>
