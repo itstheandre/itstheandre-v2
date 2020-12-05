@@ -1,13 +1,11 @@
-import matter from "gray-matter";
-import readingTime from "reading-time";
-import renderToString from "next-mdx-remote/render-to-string";
-import hydrate from "next-mdx-remote/hydrate";
-import { getAllPostSlugs, getPostData } from "../../lib/posts";
-import Head from "next/head";
-import { Project } from "../../components";
 import { Box, Text } from "@chakra-ui/react";
-import { MDXProvider } from "@mdx-js/react";
-import { Code } from "../../test/Code";
+import matter from "gray-matter";
+import hydrate from "next-mdx-remote/hydrate";
+import renderToString from "next-mdx-remote/render-to-string";
+import Head from "next/head";
+import readingTime from "reading-time";
+import { Project } from "../../components";
+import { getAllPostSlugs, getPostData } from "../../lib/posts";
 const components = { Project: Project };
 
 export default function Posts({ source, frontMatter }) {
