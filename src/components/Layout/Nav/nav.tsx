@@ -22,7 +22,7 @@ import { SmNav } from "./sm.nav";
 
 export const Nav = () => {
   const { toggleColorMode } = useColorMode();
-  const [isMedium] = useMediaQuery("(min-width: 768px)");
+  const [isMedium = true] = useMediaQuery("(min-width: 768px)");
   const { isOpen } = useMenu();
 
   return (
