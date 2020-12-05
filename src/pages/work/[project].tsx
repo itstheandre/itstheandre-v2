@@ -14,6 +14,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import hydrate from "next-mdx-remote/hydrate";
 import renderToString from "next-mdx-remote/render-to-string";
 import NextImage from "next/image";
+import { useRouter } from "next/router";
 import { NextLink, PageHero, PageIntro, Project } from "../../components";
 import { TLDR } from "../../components/MDXComps";
 import { getAllProjectSlugs, getProjectData } from "../../lib/projects";
@@ -31,6 +32,12 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
   source,
   frontMatter,
 }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   // console.log("source:", source);
   // console.log("frontMatter:", frontMatter);
   // console.log("source:", source);
@@ -121,7 +128,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllProjectSlugs();
 
   return {
-    fallback: false,
+    fallback: true,
     paths,
   };
 };
