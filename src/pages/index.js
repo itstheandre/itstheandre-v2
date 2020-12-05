@@ -19,8 +19,7 @@ export default function Home({ projects }) {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>André de Albuquerque</title>
       </Head>
       <PageHeader homePage>
         <PageIntro>Hello 👋</PageIntro>

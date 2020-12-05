@@ -103,9 +103,16 @@ export const BurgerMenu = () => {
         </DrawerOverlay>
       </Drawer>
       <StyledBurger
+        display={{ base: "flex", md: "none" }}
         open={isOpen}
         onClick={isOpen ? onClose : onOpen}
-        colorMode={colorMode}
+        colormode={colorMode}
+        _hover={{
+          bg: "none",
+        }}
+        _active={{
+          bg: "none",
+        }}
       >
         <div />
         <div />

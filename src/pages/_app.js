@@ -11,10 +11,15 @@ import { InfoIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { Layout, Main, Nav } from "../components/";
 import { MDXProvider } from "@mdx-js/react";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
+      <Head>
+        <title>André de Albuquerque</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Layout>
         {/* <MDXProvider components={components}> */}
         <Component {...pageProps} />

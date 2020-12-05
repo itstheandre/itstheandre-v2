@@ -1,15 +1,16 @@
+import { Button } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { gray900 } from "../utils/custom.colors";
 
 interface BurgerProps {
   open: boolean;
-  colorMode?: "light" | "dark";
+  colormode?: "light" | "dark";
   index?: number;
 }
 
-export const StyledBurger = styled.button<BurgerProps>`
+export const StyledBurger = styled(Button)<BurgerProps>`
   position: relative;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: space-around;
   width: 2rem;
@@ -27,8 +28,8 @@ export const StyledBurger = styled.button<BurgerProps>`
   div {
     width: 2rem;
     height: 0.25rem;
-    background: ${({ colorMode }) =>
-      colorMode === "light" ? gray900 : "white"};
+    background: ${({ colormode }) =>
+      colormode === "light" ? gray900 : "white"};
     border-radius: 10px;
     transition: all 0.3s linear;
     /* position: relative; */
