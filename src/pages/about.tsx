@@ -82,7 +82,7 @@ export default function About() {
         <Box>
           <Heading
             as="h4"
-            fontSize={{ base: "xl", md: "2xl" }}
+            fontSize={{ base: "xl", md: "2xl", lg:"4xl" }}
             textAlign="center"
             fontFamily={TTMonoBold}
             mb="2"

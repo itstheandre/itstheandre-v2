@@ -22,7 +22,7 @@ export const PageHeader: FC<PageHeaderProps> = ({
       justifyContent="center"
       align="center"
     >
-      <Box as="header" textAlign="left">
+      <Box as="header" textAlign="left" mx={{ lg: "7.75em", xl: "7em" }}>
         {children}
       </Box>
     </Flex>

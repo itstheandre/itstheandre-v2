@@ -72,6 +72,7 @@ export default function Contact() {
         mb={24}
         onSubmit={onSubmit}
         as="form"
+        mx={{ lg: "7.75em", xl: "7em" }}
       >
         <FormControl
           id="name"
