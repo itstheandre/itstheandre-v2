@@ -5,9 +5,7 @@ import {
   DrawerOverlay,
   Flex,
   Heading,
-  Text,
   useColorMode,
-  VStack,
 } from "@chakra-ui/react";
 import {
   //   BurgerSlices,
@@ -18,7 +16,6 @@ import { NextLink } from "../../Common";
 import { useMenu } from "../Layout";
 
 export const BurgerMenu = () => {
-  // const [isOpen, setIsOpen] = useState(false);
   const { colorMode } = useColorMode();
 
   const { isOpen, onOpen, onClose } = useMenu();

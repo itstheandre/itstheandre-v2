@@ -16,18 +16,30 @@ import renderToString from "next-mdx-remote/render-to-string";
 import Head from "next/head";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
-import { NextLink, PageHero, PageIntro, Project } from "../../components";
+import {
+  DecoratedLink,
+  EmojiWrapper,
+  NextLink,
+  PageHero,
+  PageIntro,
+  Project,
+} from "../../components";
 import { TLDR } from "../../components/MDXComps";
 import { getAllProjectSlugs, getProjectData } from "../../lib/projects";
 import { TTMonoBold } from "../../theme/utils/fonts";
+import { IProject } from "../../shared/types";
 
 const components = {
   TLDR,
   Project,
+  NextLink,
+  EmojiWrapper,
+  DecoratedLink,
 };
 
 interface IndividualProjectProps {
-  [key: string]: any;
+  source: string;
+  frontMatter: IProject;
 }
 const IndividualProjects: NextPage<IndividualProjectProps> = ({
   source,
@@ -149,7 +161,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
+      frontMatter: data as IProject,
     },
   };
 };

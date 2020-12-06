@@ -8,12 +8,13 @@ import { NextLink } from "../Common";
 import { useIsLarge } from "../../hooks";
 import { AnimatePresence, motion } from "framer-motion";
 import NextImage from "next/image";
+import { IProject } from "../../shared/types";
 
 const ProjectBox = motion.custom(Box);
 const Image = motion.custom(Box);
 const Description = motion.custom(Text);
 
-interface ProjectProps {
+interface ProjectProps extends IProject {
   isLast?: boolean;
   slug?: string;
   name?: string;
@@ -39,7 +40,10 @@ export const Project: React.FC<ProjectProps> = ({
   isLast = false,
   name = "Savorly",
   slug,
+  banner,
+  ...rest
 }) => {
+  console.log("rest:", rest);
   const { colorMode } = useColorMode();
   const isLarge = useIsLarge();
 
@@ -88,7 +92,9 @@ export const Project: React.FC<ProjectProps> = ({
                 variants={DescriptionVariants}
               >
                 <NextImage
-                  src="/images/projects/savorly-banner.png"
+                  src={
+                    banner || "/images/projects/pioneers/pioneers-banner.png"
+                  }
                   alt="Savorly"
                   height={366}
                   width={640}

@@ -1,5 +1,6 @@
 import { Code } from "./Code/CodeComponent";
 import { Code as ChakraCode, Heading, Text } from "@chakra-ui/react";
+import { NextLink } from "../../../components";
 
 export const mdxComponents = {
   "p.inlineCode": (props) => (
@@ -11,6 +12,7 @@ export const mdxComponents = {
   h3: (props) => (
     <Heading as="h3" {...props} mb="4" mt="10" fontSize={{ base: "md" }} />
   ),
+  a: (props) => <NextLink textDecor="underline" {...props} />,
   h4: (props) => (
     <Heading as="h4" mb="4" mt="10" {...props} fontSize={{ base: "lg" }} />
   ),

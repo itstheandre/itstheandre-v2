@@ -2,7 +2,11 @@ import { Box, Heading, Text, useColorMode } from "@chakra-ui/react";
 import { FC } from "react";
 import { TTMonoBold, TTMonoReg } from "../../theme/utils/fonts";
 
-export const TLDR: FC = ({ children }) => {
+interface TLDRProps {
+  title?: string;
+}
+
+export const TLDR: FC<TLDRProps> = ({ children }) => {
   const { colorMode } = useColorMode();
   const bg = colorMode === "dark" ? "gray.800" : "gray.50";
   return (

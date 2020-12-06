@@ -6,8 +6,9 @@ import {
   ListItem,
   UnorderedList,
 } from "@chakra-ui/react";
+
 import { theme } from "../theme";
-import { InfoIcon } from "@chakra-ui/icons";
+      import { InfoIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { Layout, Main, Nav } from "../components/";
 import { MDXProvider } from "@mdx-js/react";

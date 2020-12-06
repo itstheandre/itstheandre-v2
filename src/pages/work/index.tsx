@@ -12,10 +12,11 @@ import {
 } from "../../components";
 import { useIsMedium } from "../../hooks";
 import { getSortedProjects } from "../../lib/projects";
+import { IProject } from "../../shared/types";
 
 type Projects = "frontend" | "backend" | "apps" | "all";
 
-export default function Work({ projects }) {
+export default function Work({ projects }: { projects: IProject[] }) {
   const isMedium = useIsMedium();
   const [isSelected, setIsSelected] = useState(true);
   const [selected, setSelected] = useState<Projects>("all");
@@ -77,6 +78,7 @@ export default function Work({ projects }) {
             slug={el.slug}
             name={el.title}
             isLast={i === length - 1}
+            {...el}
           />
         );
       })}

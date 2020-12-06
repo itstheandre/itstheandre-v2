@@ -2,6 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
+import { IProject } from "../shared/types";
 
 const projectsDir = join(process.cwd(), "src", "projects");
 
@@ -48,7 +49,7 @@ export function getSortedProjects() {
 
   return allProjectsData.sort((a, b) => {
     return (b as any).order - (a as any).order;
-  });
+  }) as IProject[];
 }
 
 export const getAllProjectSlugs = () => {
