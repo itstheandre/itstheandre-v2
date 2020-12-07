@@ -1,45 +1,13 @@
-import {
-  ColorMode,
-  ListItem,
-  UnorderedList,
-  useColorMode,
-} from "@chakra-ui/react";
-import styled from "@emotion/styled";
+import { UnorderedList, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { gray50, gray900 } from "../../../theme/utils/custom.colors";
+import { MenuLink } from "../../../theme/custom/MenuLink";
 import { NextLink } from "../../Common/Links";
 import { NameLink } from "./name";
 import { webLinks } from "./webLinks";
 
-const MenuLink = styled(ListItem)<{
-  isRightPage: boolean;
-  colormode: ColorMode;
-}>`
-  ${({ isRightPage, colormode }) => {
-    if (isRightPage) {
-      return `
-    &::before {
-      transform: translateX(-50%);
-      border-radius: 100%;
-      position: absolute;
-      background: ${colormode === "dark" ? gray50 : gray900};
-      bottom: -0.7em;
-      height: 8px;
-      content: '';
-      width: 8px;
-      left: 50%;
-    }
-    `;
-    }
-  }}
-`;
-
 export const MdNav = () => {
-  const router = useRouter();
-  console.log("router:", router);
-  const { route } = router;
+  const { route } = useRouter();
   const { colorMode } = useColorMode();
-  console.log("router:", route);
   return (
     <>
       <NameLink />
@@ -57,7 +25,7 @@ export const MdNav = () => {
           return (
             <MenuLink
               colormode={colorMode}
-              isRightPage={isRightPage}
+              isrightpage={isRightPage}
               key={el.url}
               pos="relative"
               textAlign="center"
