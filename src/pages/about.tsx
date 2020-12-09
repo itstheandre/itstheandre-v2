@@ -1,10 +1,12 @@
 import {
+  AspectRatio,
   Badge,
   Box,
   Flex,
   Grid,
   Heading,
   HStack,
+  Image,
   SimpleGrid,
   Text,
   useColorMode,
@@ -17,6 +19,7 @@ import { useIsMedium } from "../hooks";
 import { myIcons } from "../Icons";
 import { ReactIcon } from "../Icons/React.icon";
 import { TTMonoBold } from "../theme/utils/fonts";
+import NextImage from "next/image";
 
 type TechUsed = "all" | "frontend" | "backend" | "lib";
 
@@ -31,10 +34,11 @@ export default function About() {
     <>
       <Flex
         minH="calc(100vh - 96px)"
-        bg="brand.main"
+        // bg="brand.main"
         align="center"
         dir="column"
         mb={{ base: "8em", lg: "10em" }}
+        pos="relative"
       >
         <Box px={{ lg: "8em", xl: "7em" }}>
           <Heading
@@ -42,19 +46,45 @@ export default function About() {
             variant="mono"
             fontSize={{ base: "md", sm: "xl", xl: "2xl" }}
             mb={1}
+            zIndex="1"
           >
             {greetings}
           </Heading>
           <Heading
             as="h2"
             fontSize={{ base: "3xl", sm: "4xl", lg: "5xl", xl: "6xl" }}
+            zIndex="1"
           >
             It's the André here
           </Heading>
-          <HStack spacing="6" mt="8">
+          <HStack spacing="6" mt="8" zIndex="1">
             <ReactIcon w="5" h="5" />
             <ReactIcon w="5" h="5" />
           </HStack>
+          <Box
+            ratio={1 / 2}
+            overflow="hidden"
+            pos="absolute"
+            h="100%"
+            w="100%"
+            top="0"
+            left="0"
+          >
+            <AspectRatio
+              zIndex="-1"
+              h="100%"
+              ratio={{ base: 2 / 1, xl: 1 / 2 }}
+            >
+              <Image src="/images/about/dark-hero.png" h="100%" />
+              {/* <NextImage
+                src="/images/about/dark-hero.png"
+                height={712}
+                width={343}
+                objectFit="cover"
+                quality={100}
+              /> */}
+            </AspectRatio>
+          </Box>
         </Box>
       </Flex>
       <Box>
