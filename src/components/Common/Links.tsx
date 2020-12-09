@@ -26,11 +26,21 @@ export const NextLink: FC<NextChakraLinkProps> = ({
   shallow,
   prefetch,
   children,
+  isExternal,
   ...chakraProps
 }) => {
+  const extraProps = isExternal
+    ? ({
+        isExternal: true,
+        referrerPolicy: "no-referrer",
+        target: "_blank",
+      } as const)
+    : {};
   return (
     <NLink passHref href={href}>
-      <Link {...chakraProps}>{children}</Link>
+      <Link {...chakraProps} {...extraProps}>
+        {children}
+      </Link>
     </NLink>
   );
 };

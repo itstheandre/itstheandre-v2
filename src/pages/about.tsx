@@ -1,25 +1,23 @@
 import {
-  AspectRatio,
   Badge,
   Box,
   Flex,
   Grid,
   Heading,
   HStack,
-  Image,
   SimpleGrid,
   Text,
   useColorMode,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
+import NextImage from "next/image";
 import { useState } from "react";
-import { AboutHeader, AboutWrapper, LetsWork } from "../components";
+import { AboutWrapper, LetsWork, NextLink } from "../components";
 import { useIsMedium } from "../hooks";
-import { myIcons } from "../Icons";
+import { GithubIcon, LinkedinIcon, myIcons } from "../Icons";
 import { ReactIcon } from "../Icons/React.icon";
 import { TTMonoBold } from "../theme/utils/fonts";
-import NextImage from "next/image";
 
 type TechUsed = "all" | "frontend" | "backend" | "lib";
 
@@ -58,8 +56,20 @@ export default function About() {
             It's the André here
           </Heading>
           <HStack spacing="6" mt="8" zIndex="1">
-            <ReactIcon w="5" h="5" />
-            <ReactIcon w="5" h="5" />
+            <NextLink
+              referrerPolicy="no-referrer"
+              isExternal
+              href="https://linkedin.com/in/itstheandre"
+            >
+              <LinkedinIcon w="5" h="5" />
+            </NextLink>
+            <NextLink
+              referrerPolicy="no-referrer"
+              isExternal
+              href="https://github.com/itstheandre"
+            >
+              <GithubIcon w="5" h="5" />
+            </NextLink>
           </HStack>
           <Box
             ratio={1 / 2}
@@ -69,21 +79,24 @@ export default function About() {
             w="100%"
             top="0"
             left="0"
+            zIndex="-1"
           >
-            <AspectRatio
-              zIndex="-1"
-              h="100%"
-              ratio={{ base: 2 / 1, xl: 1 / 2 }}
-            >
-              <Image src="/images/about/dark-hero.png" h="100%" />
-              {/* <NextImage
+            <Box h="100%" d={{ base: "none", md: "block" }}>
+              <NextImage
                 src="/images/about/dark-hero.png"
-                height={712}
-                width={343}
+                layout="fill"
                 objectFit="cover"
                 quality={100}
-              /> */}
-            </AspectRatio>
+              />
+            </Box>
+            <Box h="100" d={{ base: "block", md: "none" }}>
+              <NextImage
+                src="/images/about/dark-hero-2.png"
+                layout="fill"
+                objectFit="cover"
+                quality={100}
+              />
+            </Box>
           </Box>
         </Box>
       </Flex>

@@ -55,7 +55,6 @@ export default function Contact() {
             href="mailto:code@itstheandre.com"
             cursor="pointer"
             className="strokerText stroke"
-            referrerPolicy="no-referrer"
             isExternal
           >
             email me
