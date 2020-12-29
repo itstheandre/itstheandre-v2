@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 
 import { theme } from "../theme";
-      import { InfoIcon } from "@chakra-ui/icons";
+import { InfoIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { Layout, Main, Nav } from "../components/";
 import { MDXProvider } from "@mdx-js/react";
@@ -21,11 +21,14 @@ function MyApp({ Component, pageProps }) {
         <title>André de Albuquerque</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {process.env.NODE_ENV === "production" ? <div /> : (
+        
       <Layout>
-        {/* <MDXProvider components={components}> */}
         <Component {...pageProps} />
+        {/* <MDXProvider components={components}> */}
         {/* </MDXProvider> */}
       </Layout>
+      )}
     </ChakraProvider>
   );
 }
