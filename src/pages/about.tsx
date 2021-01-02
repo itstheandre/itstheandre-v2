@@ -1,5 +1,4 @@
 import {
-  Badge,
   Box,
   Flex,
   Grid,
@@ -8,22 +7,19 @@ import {
   SimpleGrid,
   Text,
   useColorMode,
-  Wrap,
-  WrapItem,
 } from "@chakra-ui/react";
 import NextImage from "next/image";
-import { useState } from "react";
-import { AboutWrapper, LetsWork, NextLink } from "../components";
+import {
+  AboutTechnologies,
+  AboutWrapper,
+  LetsWork,
+  NextLink,
+} from "../components";
 import { useIsMedium } from "../hooks";
-import { GithubIcon, LinkedinIcon, myIcons } from "../Icons";
-import { ReactIcon } from "../Icons/React.icon";
-import { TTMonoBold } from "../theme/utils/fonts";
-
-type TechUsed = "all" | "frontend" | "backend" | "lib";
+import { GithubIcon, LinkedinIcon } from "../Icons";
 
 export default function About() {
   const { colorMode } = useColorMode();
-  const [techUsed, setTechUsed] = useState<TechUsed>("all");
   const medium = useIsMedium();
 
   const greetings =
@@ -31,7 +27,8 @@ export default function About() {
   return (
     <>
       <Flex
-        minH="calc(100vh - 96px)"
+        mt="6"
+        minH="calc(100vh - 120px)"
         // bg="brand.main"
         align="center"
         dir="column"
@@ -44,6 +41,7 @@ export default function About() {
             variant="mono"
             fontSize={{ base: "md", sm: "xl", xl: "2xl" }}
             mb={1}
+            color="white"
             zIndex="1"
           >
             {greetings}
@@ -52,6 +50,7 @@ export default function About() {
             as="h2"
             fontSize={{ base: "3xl", sm: "4xl", lg: "5xl", xl: "6xl" }}
             zIndex="1"
+            color="white"
           >
             It's the André here
           </Heading>
@@ -177,92 +176,8 @@ export default function About() {
           </AboutWrapper>
         </Grid>
       </Box>
-      <Box mt="40" w={{ md: "80%" }} ml={{ md: "auto" }} mr={{ md: "auto" }}>
-        <Box>
-          <Heading
-            as="h4"
-            fontSize={{ base: "xl", md: "2xl", lg: "4xl" }}
-            textAlign="center"
-            fontFamily={TTMonoBold}
-            mb="2"
-          >
-            Technologies
-          </Heading>
-          <Text fontSize="4" textAlign="center">
-            Here are some technologies that I’ve worked with and have been
-            trying to master
-          </Text>
-        </Box>
-        <Flex
-          mt={12}
-          ml={{ md: "auto" }}
-          mr={{ md: "auto" }}
-          w={{ md: "60%" }}
-          justifyContent="space-between"
-          fontSize="0"
-        >
-          <Badge
-            d="flex"
-            variant={techUsed === "all" ? "selected" : "unselected"}
-            onClick={() => setTechUsed("all")}
-          >
-            All
-          </Badge>
-          <Badge
-            d="flex"
-            variant={techUsed === "frontend" ? "selected" : "unselected"}
-            onClick={() => setTechUsed("frontend")}
-          >
-            Front-End
-          </Badge>
-          <Badge
-            d="flex"
-            variant={techUsed === "backend" ? "selected" : "unselected"}
-            onClick={() => setTechUsed("backend")}
-          >
-            Back-End
-          </Badge>
-          <Badge
-            d="flex"
-            variant={techUsed === "lib" ? "selected" : "unselected"}
-            onClick={() => setTechUsed("lib")}
-          >
-            Libraries
-          </Badge>
-        </Flex>
-        <Wrap spacing="24px" justify="center" mt={16}>
-          {myIcons.map((Comp, i) => (
-            <WrapItem key={i}>
-              <Comp h="16" w="16" />
-            </WrapItem>
-          ))}
 
-          <WrapItem>
-            <ReactIcon h="16" w="16" />
-          </WrapItem>
-
-          <WrapItem>
-            <ReactIcon h="16" w="16" />
-          </WrapItem>
-
-          <WrapItem>
-            <ReactIcon h="16" w="16" />
-          </WrapItem>
-
-          <WrapItem>
-            <ReactIcon h="16" w="16" />
-          </WrapItem>
-          <WrapItem>
-            <ReactIcon h="16" w="16" />
-          </WrapItem>
-          <WrapItem>
-            <ReactIcon h="16" w="16" />
-          </WrapItem>
-          <WrapItem>
-            <ReactIcon h="16" w="16" />
-          </WrapItem>
-        </Wrap>
-      </Box>
+      <AboutTechnologies />
 
       <LetsWork />
     </>

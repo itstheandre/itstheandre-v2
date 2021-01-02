@@ -1,23 +1,6 @@
-import { InfoIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Flex,
-  Grid,
-  Heading,
-  Icon,
-  ListItem,
-  Switch,
-  Text,
-  UnorderedList,
-  useColorMode,
-  useDisclosure,
-  useMediaQuery,
-} from "@chakra-ui/react";
-import NextLink from "next/link";
-import { createContext, FC } from "react";
+import { Grid, Switch, useColorMode, useMediaQuery } from "@chakra-ui/react";
 import { useMenu } from "../Layout";
 import { MdNav } from "./md.nav";
-import { NameLink } from "./name";
 import { SmNav } from "./sm.nav";
 
 export const Nav = () => {

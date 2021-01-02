@@ -9,7 +9,7 @@ import {
 import NextImage from "next/image";
 import * as React from "react";
 import { useIsLarge, useIsMedium } from "../../hooks";
-import { ReactIcon } from "../../Icons/React.icon";
+import { ReactIcon } from "../../Icons/TechIcons/React.icon";
 import { TTRegBold } from "../../theme/utils/fonts";
 
 export function AboutHeader() {
