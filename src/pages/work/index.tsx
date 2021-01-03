@@ -10,16 +10,28 @@ import {
   PageIntro,
   Project,
 } from "../../components";
-import { useIsMedium } from "../../hooks";
+import shallow from "zustand/shallow";
+import { useIsMedium, useProjects } from "../../hooks";
 import { getSortedProjects } from "../../lib/projects";
-import { IProject } from "../../shared/types";
+import { IProject, ProjectType } from "../../shared/types";
 
-type Projects = "frontend" | "backend" | "apps" | "all";
+type WorkPageProject = ProjectType | "all";
 
 export default function Work({ projects }: { projects: IProject[] }) {
+  console.log("projects:", projects);
   const isMedium = useIsMedium();
+  const { showing, showMore, showLess, selected, setSelected } = useProjects();
+  console.log("showing:", showing);
   const [isSelected, setIsSelected] = useState(true);
-  const [selected, setSelected] = useState<Projects>("all");
+  const isGrowing = showing <= projects.length;
+  console.log("isGrowing:", isGrowing);
+  function addProjects() {
+    let count = 2;
+    if (showing + 2 >= projects.length) {
+      count = 1;
+    }
+    showMore(count);
+  }
   return (
     <>
       <Head>
@@ -52,11 +64,21 @@ export default function Work({ projects }: { projects: IProject[] }) {
           <Text
             cursor="pointer"
             as="span"
-            onClick={() => setSelected("apps")}
-            className={selected === "apps" ? "" : "strokerText stroke"}
-            color={selected === "apps" ? "brand.main" : ""}
+            onClick={() => setSelected("app")}
+            className={selected === "app" ? "" : "strokerText stroke"}
+            color={selected === "app" ? "brand.main" : ""}
           >
             apps
+          </Text>
+          ,{" "}
+          <Text
+            cursor="pointer"
+            as="span"
+            onClick={() => setSelected("oss")}
+            className={selected === "oss" ? "" : "strokerText stroke"}
+            color={selected === "oss" ? "brand.main" : ""}
+          >
+            open source packages
           </Text>
           , or just check{" "}
           <Text
@@ -71,21 +93,32 @@ export default function Work({ projects }: { projects: IProject[] }) {
         </PageHero>
       </PageHeader>
 
-      {projects.map((el, i, { length }) => {
-        return (
-          <Project
-            key={el.slug}
-            slug={el.slug}
-            name={el.title}
-            isLast={i === length - 1}
-            {...el}
-          />
-        );
-      })}
+      {projects
+        .slice(0, showing)
+        .filter((el) =>
+          selected === "all" ? el.type.includes("") : el.type.includes(selected)
+        )
+        .map((el, i, { length }) => {
+          return (
+            <Project
+              key={el.slug}
+              slug={el.slug}
+              name={el.title}
+              isLast={i === length - 1}
+              {...el}
+            />
+          );
+        })}
 
       <Flex mt={10} justifyContent="center">
-        <Button variant="outline" textAlign="center">
-          Load more
+        <Button
+          variant="outline"
+          textAlign="center"
+          onClick={() =>
+            showing < projects.length ? addProjects() : showLess(3)
+          }
+        >
+          {showing < projects.length ? "Load more" : "Show less"}
         </Button>
       </Flex>
       <LetsWork h="100vh" />

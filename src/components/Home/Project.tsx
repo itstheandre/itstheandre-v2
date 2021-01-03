@@ -41,9 +41,9 @@ export const Project: React.FC<ProjectProps> = ({
   name = "Savorly",
   slug,
   banner,
+  category,
   ...rest
 }) => {
-  console.log("rest:", rest);
   const { colorMode } = useColorMode();
   const isLarge = useIsLarge();
 
@@ -81,7 +81,7 @@ export const Project: React.FC<ProjectProps> = ({
           {isLarge && (
             <>
               <Description size="sm" variants={DescriptionVariants}>
-                🛒 E-commerce website
+                {category}
               </Description>
               <Image
                 pos="absolute"

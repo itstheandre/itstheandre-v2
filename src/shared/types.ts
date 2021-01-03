@@ -2,6 +2,7 @@ export interface IMember {
   name: string;
   url: string;
 }
+export type ProjectType = "frontend" | "backend" | "app" | "oss";
 
 export interface IProject {
   title: string;
@@ -12,5 +13,6 @@ export interface IProject {
   banner: string;
   shortDescription: string;
   category: string;
+  type: ProjectType;
   technologies: string[];
 }
