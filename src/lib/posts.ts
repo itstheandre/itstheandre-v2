@@ -1,60 +1,59 @@
 import fs from "fs";
-import path from "path";
+import path, { join } from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
+import { IPost } from "../shared/types";
 
 const postsDir = path.join(process.cwd(), "src", "posts");
 
-export const getSortedPosts = () => {
+export function getSortedPosts() {
   const fileNames = fs.readdirSync(postsDir);
 
   const allPostsData = fileNames.map((el) => {
-    const slug = el.replace(".mdx", "");
-    const fullPath = path.join(postsDir, el);
+    const slug = el.replace(/[\d_]+|.mdx/g, "");
+    const fullPath = join(postsDir, el);
+
     const fileContents = fs.readFileSync(fullPath, "utf-8");
     const { data, content } = matter(fileContents);
 
-    const options = { month: "long", day: "numeric", year: "numeric" };
+    const options = {
+      year: "numeric",
+      month: "long",
+    };
 
     const formattedDate = new Date(data.date).toLocaleDateString(
-      "en-IN",
+      "UTC",
       options
     );
+    const frontmatter: IPost = { ...(data as IPost), date: formattedDate };
 
-    const frontmatter = {
-      ...data,
-      date: formattedDate,
-    };
     return {
       slug,
       ...frontmatter,
     };
   });
 
-  return allPostsData.sort((a, b) => {
-    if (new Date(a.date) < new Date(b.date)) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-};
+  return allPostsData.sort((a, b) =>
+    new Date(a.date) < new Date(b.date) ? 1 : -1
+  ) as IPost[];
+}
 
 export const getAllPostSlugs = () => {
   const fileNames = fs.readdirSync(postsDir);
-  console.log("fileNames:", fileNames);
 
   return fileNames.map((filename) => {
     return {
       params: {
-        slug: filename.replace(".mdx", ""),
+        slug: filename.replace(/[\d_]+|.mdx/g, ""),
       },
     };
   });
 };
 
-export const getPostData = async (slug) => {
-  const fullPath = path.join(postsDir, `${slug}.mdx`);
+export const getPostData = async (slug: string) => {
+  const allPosts = fs.readdirSync(postsDir);
+  const currentPost = allPosts.find((e) => e.includes(slug));
+  const fullPath = path.join(postsDir, currentPost);
   const postContent = fs.readFileSync(fullPath, "utf8");
 
   return postContent;

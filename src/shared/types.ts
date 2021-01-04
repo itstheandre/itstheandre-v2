@@ -16,3 +16,10 @@ export interface IProject {
   type: ProjectType;
   technologies: string[];
 }
+
+export interface IPost {
+  title: string;
+  date: string | Date;
+  excerpt: string;
+  banner: string;
+}

@@ -19,6 +19,7 @@ import {
 import { MyIconProps } from "./TechIcons/interface";
 export * from "./Github.icon";
 export * from "./Linkedin.icon";
+export * from "./RightArrow";
 
 export type TechUsed =
   | "all"

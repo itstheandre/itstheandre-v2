@@ -21,7 +21,7 @@ export const MdNav = () => {
         listStyleType="none"
       >
         {webLinks.map((el) => {
-          const isRightPage = el.url === route;
+          const isRightPage = route.includes(el.url);
           return (
             <MenuLink
               colormode={colorMode}

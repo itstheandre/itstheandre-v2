@@ -9,7 +9,7 @@ import {
 import NextImage from "next/image";
 import * as React from "react";
 import { useIsLarge, useIsMedium } from "../../hooks";
-import { ReactIcon } from "../../Icons/TechIcons/React.icon";
+// import { ReactIcon } from "../../Icons/TechIcons/React.icon";
 import { TTRegBold } from "../../theme/utils/fonts";
 
 export function AboutHeader() {
@@ -42,10 +42,10 @@ export function AboutHeader() {
         id sit massa. Eu morbi elementum in augue a, nisl donec. Ultricies ut
         fermentum libero velit volutpat, placerat massa
       </Text>
-      <HStack spacing="6" mt="6">
+      {/* <HStack spacing="6" mt="6">
         <ReactIcon w="5" h="5" />
         <ReactIcon w="5" h="5" />
-      </HStack>
+      </HStack> */}
       <Box
         h="100%"
         display={{ base: "none", md: "block" }}

@@ -12,6 +12,7 @@ export const Nav = () => {
     <Grid
       mt={5}
       h={12}
+      mb="2"
       templateColumns="repeat(3,1fr)"
       gridColumnGap={2}
       justifyContent="center"

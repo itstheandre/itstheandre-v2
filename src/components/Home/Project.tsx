@@ -1,14 +1,9 @@
-import { Box, ColorMode, Heading, Text, useColorMode } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { brandMain, gray900 } from "../../theme/utils/custom.colors";
-import styled from "@emotion/styled";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { NextLink } from "../Common";
-import { useIsLarge } from "../../hooks";
-import { AnimatePresence, motion } from "framer-motion";
+import { Box, Heading, Text, useColorMode } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import NextImage from "next/image";
+import { useIsLarge } from "../../hooks";
 import { IProject } from "../../shared/types";
+import { NextLink } from "../Common";
 
 const ProjectBox = motion.custom(Box);
 const Image = motion.custom(Box);
