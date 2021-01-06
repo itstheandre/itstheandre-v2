@@ -15,6 +15,7 @@ export interface IProject {
   category: string;
   type: ProjectType;
   technologies: string[];
+  url: string;
 }
 
 export interface IPost {

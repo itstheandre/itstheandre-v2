@@ -35,7 +35,7 @@ function SuccessToast({
   const toast = useToast();
   const toastIdRef = useRef();
   function close() {
-    console.log("toastIdRef:", toastIdRef);
+    // console.log("toastIdRef:", toastIdRef);
     toast.closeAll();
     if (toastIdRef.current) {
     }

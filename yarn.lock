@@ -1854,6 +1854,37 @@
   dependencies:
     tslib "^2.0.0"
 
+"@solx/css-features@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@solx/css-features/-/css-features-1.2.1.tgz#687bffaf60164d477a706741c9c5528661450222"
+  integrity sha512-dmEkqYJd/sRsMoj2XwVFcQ82xW73epRJhdV3bfDt89D89bWi8WC8gANrttPb+mcXzkETH5VcRT1Dt0O/VjD6UQ==
+
+"@solx/css-media-types@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@solx/css-media-types/-/css-media-types-1.1.1.tgz#21d81251e9013f77e36a1382aed29d303282cf5e"
+  integrity sha512-hV8Tepiq/3z7L+JPPHpOhJZbnrR6f3sbQwdF6Th8Mhj7iiBhA+uiuzLiS664SwYqhCHQt4UROCwOd4MsObqKUg==
+
+"@solx/css-units@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@solx/css-units/-/css-units-1.0.0.tgz#bfa0e0e28ebd6716ad49063466988bf6dd6cf67d"
+  integrity sha512-pZjVc1XogL7j+O0qMU11qNSR3Vxj2/ExTsTiDLEc/TpPuRVi7DsXc7fJ+NCoVcTFIRYIm0NfNlSEfXdf6shaWA==
+
+"@solx/ismediaquery@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@solx/ismediaquery/-/ismediaquery-1.1.1.tgz#c909e122d297d67e2835ead9d427961e541364fd"
+  integrity sha512-nLp8A9YFOySFaEoVtV6xVJUHwNfdmUb9H0aHvC+U8itEiECSX4ENZ7uqsRcwI2YxP2MP7lvl7+wmUnXpD3styw==
+  dependencies:
+    "@solx/css-features" "^1.2.1"
+    "@solx/css-media-types" "^1.1.1"
+    "@solx/css-units" "^1.0.0"
+
+"@solx/use-media-query@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@solx/use-media-query/-/use-media-query-1.1.1.tgz#9c94001736b470a1121a9806570415f2c73c44c1"
+  integrity sha512-d2ZYwRy9WKWjN9oVGnPU/F0BEDzfgGd+azliqXoJu2VM5d/iMDKU+ppQNkexsMr6fvZFzkTUBm8kkft+293ztg==
+  dependencies:
+    "@solx/ismediaquery" "^1.1.1"
+
 "@types/hast@^2.0.0":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@types/hast/-/hast-2.3.1.tgz#b16872f2a6144c7025f296fb9636a667ebb79cd9"
@@ -1937,6 +1968,11 @@
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
   integrity sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ==
+
+"@types/validator@^13.1.2":
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.1.2.tgz#03b989935c71a4c0b2582dbb20a1697dcc9eb319"
+  integrity sha512-ZLZRZ+l2Ny+XIO3dR9i5ET9AzSele8uFye/fxk1JiIOY3NLAyFGIaIpv8LRbV1L4ISazU/SeOJSdPlKxoHM9Mw==
 
 "@types/warning@^3.0.0":
   version "3.0.0"
@@ -2336,7 +2372,7 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-axios@^0.21.0:
+axios@^0.21.1:
   version "0.21.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
   integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
@@ -7677,6 +7713,11 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+validator@^13.5.2:
+  version "13.5.2"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.5.2.tgz#c97ae63ed4224999fb6f42c91eaca9567fe69a46"
+  integrity sha512-mD45p0rvHVBlY2Zuy3F3ESIe1h5X58GPfAtslBjY7EtTqGquZTj+VX/J4RnHWN8FKq0C9WRVt1oWAcytWRuYLQ==
 
 vfile-location@^3.0.0, vfile-location@^3.2.0:
   version "3.2.0"

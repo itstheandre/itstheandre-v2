@@ -1,26 +1,33 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
+import { FC } from "react";
 import { RightArrowIcon } from "../../Icons";
-import { NextLink } from "../Common";
+import { EmojiWrapper, NextLink } from "../Common";
 
 interface ArticleProps {
   title: string;
   banner: string;
   href: string;
+  w?: string;
 }
 
-export const Article = (
-  props: ArticleProps = {
+export const Article: FC<ArticleProps> = (
+  props = {
     title: "Started from the bottom (of Europe) now we're here",
     href: "00_first",
     banner: "/images/blog/00/banner.png",
+    w: "",
   }
 ) => {
   const link = `/blog/${props.href}`;
-  console.log("props:", props);
   return (
-    <Box as="article" w={320}>
-      <Box h="7em" overflow="hidden" borderRadius="10px">
+    <Box
+      as="article"
+      textAlign="left"
+      w={{ base: "100%", md: "14", lg: 320 }}
+      className="here"
+    >
+      <Box h="7em" w={props.w} overflow="hidden" borderRadius="10px">
         <Image
           src={props.banner}
           width={465}
@@ -31,7 +38,9 @@ export const Article = (
       </Box>
 
       <Box as="section" mt="4">
-        <Text fontSize="md">⏰ 15 minutes</Text>
+        <Text fontSize="md" color="gray.400">
+          <EmojiWrapper>⏰</EmojiWrapper> 15 minutes
+        </Text>
         <Heading as="h3" fontSize="xl" variant="mono" lineHeight="8">
           {props.title}
         </Heading>
@@ -42,7 +51,7 @@ export const Article = (
             href={link}
             _hover={{ borderBottom: "1px solid white", pb: "4" }}
           >
-            Read more <RightArrowIcon width="6" height="6" />
+            Read <RightArrowIcon width="6" height="6" />
           </NextLink>
         </Heading>
       </Box>

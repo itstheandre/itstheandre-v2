@@ -2,13 +2,11 @@ import {
   Box,
   Flex,
   Heading,
+  SimpleGrid,
   Text,
   Wrap,
   WrapItem,
-  Grid,
 } from "@chakra-ui/react";
-import Link from "next/link";
-import { getSortedPosts } from "../../lib/posts";
 import {
   Article,
   BodyWrapper,
@@ -18,7 +16,7 @@ import {
   PageHero,
   PageIntro,
 } from "../../components";
-import Image from "next/image";
+import { getSortedPosts } from "../../lib/posts";
 
 const BlogIndex = ({ allPostsData }) => {
   // console.log("allPostsData:", allPostsData);
@@ -33,15 +31,16 @@ const BlogIndex = ({ allPostsData }) => {
         </PageHero>
       </PageHeader>
       <BodyWrapper>
-        <Wrap spacing="6">
-          {allPostsData.map((el) => {
-            return (
-              <WrapItem>
-                <Article key={el.slug} {...el} href={el.slug} />
-              </WrapItem>
-            );
-          })}
-        </Wrap>
+        <SimpleGrid
+          columns={{ base: 1, md: 3 }}
+          justifyItems={{ base: "center", md: "flex-start" }}
+          spacingX="6"
+          spacingY="12"
+        >
+          {[...allPostsData, ...allPostsData, ...allPostsData].map((el) => (
+            <Article w="100%" key={el.slug} {...el} href={el.slug} />
+          ))}
+        </SimpleGrid>
       </BodyWrapper>
       <Box my="20em">
         <Flex

@@ -5,11 +5,12 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   useColorMode,
-  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { sendForm } from "../service";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   CustomToast,
@@ -19,30 +20,81 @@ import {
   PageIntro,
 } from "../components";
 import { TTMonoBold, TTRegBold } from "../theme/utils/fonts";
+import { defaultContactForm, IContactForm } from "../utils";
+import validator from "validator";
+import { useMediaQuery } from "@solx/use-media-query";
 
 export default function Contact() {
   const { colorMode } = useColorMode();
-  const toast = useToast();
+
   const myToast = createStandaloneToast({
     defaultOptions: {
       duration: 9000,
     },
   });
 
-  const { handleSubmit, errors, register } = useForm({
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
+  const { handleSubmit, errors, register } = useForm<IContactForm>({
+    defaultValues: { ...defaultContactForm },
   });
-  console.log("errors:", errors);
 
-  const onSubmit = handleSubmit((e) => {
-    console.log("e:", e);
-    myToast({
-      render: () => <CustomToast status="success" />,
+  async function post() {
+    const { data } = await axios.post("/api/disc", { message: "stuff" });
+    console.log(data);
+  }
+
+  const onSubmit = handleSubmit(async (e) => {
+    const obj = await sendForm(e);
+    if (obj.status === "error" && !obj.showError) {
+      return;
+    }
+    // if (obj.status === "error") {
+    return myToast({
+      render: () => <CustomToast {...obj} />,
     });
+    // }
+    // console.log("e:", e);
+    // if (e.meName || e.phone) {
+    //   return;
+    // }
+    // const isEmail = validator.isEmail(e.email);
+    // if (!isEmail) {
+    //   return myToast({
+    //     render: () => (
+    //       <CustomToast
+    //         status="error"
+    //         title="Please type in a valid email"
+    //         description="The email you wrote is not a valid email"
+    //       />
+    //     ),
+    //   });
+    // }
+    // if (!validator.isLength(e.name, { min: 5 })) {
+    //   return myToast({
+    //     render: () => (
+    //       <CustomToast
+    //         status="error"
+    //         title="The name is too short"
+    //         description="The name field must have a minimum 5 characters"
+    //       />
+    //     ),
+    //   });
+    // }
+    // if (!validator.isLength(e.message, { min: 20 })) {
+    //   return myToast({
+    //     render: () => (
+    //       <CustomToast
+    //         status="error"
+    //         title="Message too short"
+    //         description="The message field must have a minumum of 20 characters"
+    //       />
+    //     ),
+    //   });
+    // }
+    // try {
+    // } catch (error) {}
+    // myToast({
+    //   render: () => <CustomToast status="success" />,
+    // });
   });
   return (
     <>
@@ -62,16 +114,17 @@ export default function Contact() {
           or just fill out this form.
         </PageHero>
       </PageHeader>
-      {/* <form onSubmit={onSubmit}> */}
+
       <Box
         bg={colorMode === "dark" ? "gray.800" : "gray.50"}
-        minHeight="80vh"
+        minHeight="50vh"
         borderRadius="20px"
         p={{ base: 8, sm: 10, md: 16, lg: 20 }}
         mb={24}
         onSubmit={onSubmit}
         as="form"
         mx={{ lg: "7.75em", xl: "7em" }}
+        autoComplete="off"
       >
         <FormControl
           id="name"
@@ -85,7 +138,7 @@ export default function Contact() {
             borderBottom="1px"
             borderRadius="0"
             py="2"
-            px="0"
+            pl="2"
             mt="4"
             fontFamily={TTRegBold}
             borderBottomColor={colorMode === "dark" ? "white" : "gray.900"}
@@ -111,25 +164,26 @@ export default function Contact() {
         <FormControl id="email" fontFamily={TTMonoBold} mt="3.5em">
           <FormLabel>💌 How can I reach out to you?</FormLabel>
           <Input
-            type="text"
             border="none"
             borderBottom="1px"
             borderRadius="0"
-            fontSize="20px"
             py="2"
-            px="0"
+            pl="2"
             mt="4"
             fontFamily={TTRegBold}
             borderBottomColor={colorMode === "dark" ? "white" : "gray.900"}
-            placeholder="Type your email here"
+            fontSize="20px"
             _placeholder={{
               color: colorMode === "dark" ? "gray.600" : "gray.300",
               textAlign: "left",
               fontSize: "20px",
             }}
             _focus={{ outline: "none" }}
-            name="email"
             ref={register}
+            type="text"
+            placeholder="Type your email here"
+            autoComplete="off"
+            name="email"
           />
         </FormControl>
         <FormControl id="message" fontFamily={TTMonoBold} mt="3.5em">
@@ -140,7 +194,7 @@ export default function Contact() {
             borderBottom="1px"
             borderRadius="0"
             py="2"
-            px="0"
+            pl="2"
             fontSize="20px"
             mt="4"
             fontFamily={TTRegBold}
@@ -152,9 +206,76 @@ export default function Contact() {
               textAlign: "left",
               fontSize: "20px",
             }}
+            _active={{ bg: "none" }}
             _focus={{ outline: "none" }}
             ref={register}
             name="message"
+          />
+        </FormControl>
+        <FormControl
+          id="phone"
+          opacity={0}
+          position="absolute"
+          top="0"
+          left="0"
+          height="0"
+          w="0"
+          zIndex="-1"
+        >
+          <FormLabel
+            opacity={0}
+            position="absolute"
+            top="0"
+            left="0"
+            height="0"
+            w="0"
+            zIndex="-1"
+          ></FormLabel>
+          <Input
+            type="text"
+            name="phone"
+            autoComplete="off"
+            placeholder="Your phone here"
+            opacity={0}
+            position="absolute"
+            top="0"
+            left="0"
+            height="0"
+            w="0"
+            zIndex="-1"
+          />
+        </FormControl>
+        <FormControl
+          id="meName"
+          opacity={0}
+          position="absolute"
+          top="0"
+          left="0"
+          height="0"
+          w="0"
+          zIndex="-1"
+        >
+          <FormLabel
+            opacity={0}
+            position="absolute"
+            top="0"
+            left="0"
+            height="0"
+            w="0"
+            zIndex="-1"
+          ></FormLabel>
+          <Input
+            type="text"
+            name="meName"
+            autoComplete="off"
+            placeholder="Your meName here"
+            opacity={0}
+            position="absolute"
+            top="0"
+            left="0"
+            height="0"
+            w="0"
+            zIndex="-1"
           />
         </FormControl>
         <Flex mt={16} dir="column" justify="center">

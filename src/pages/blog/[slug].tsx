@@ -24,7 +24,6 @@ import { getAllPostSlugs, getPostData } from "../../lib/posts";
 const components = { Project: Project };
 
 export default function Posts({ source, frontMatter }) {
-  console.log("frontMatter:", frontMatter);
   const { colorMode } = useColorMode();
   const color = colorMode === "dark" ? "gray.800" : "gray.50";
   const content = hydrate(source, { components });

@@ -6,7 +6,7 @@ import { IProject } from "../shared/types";
 
 const projectsDir = join(process.cwd(), "src", "projects");
 
-export function getSingleProject(name: string = "") {
+export function getSingleProject() {
   const projects = getSortedProjects();
   return projects;
 }
@@ -20,7 +20,20 @@ export function getSortedProjects() {
   const fileNames = fs.readdirSync(projectsDir);
 
   const allProjectsData = fileNames.map((el) => {
-    const slug = el.replace(/[\d_]+|.mdx/g, "");
+    console.log(el.match(/v\d-/g));
+    const withVersion = el.match(/v\d-/);
+    let slug;
+
+    if (withVersion) {
+      const removingVersion = el.replace(/[\d_]+|v\d-|.mdx/g, "");
+      slug = `${withVersion[0]}${removingVersion}`;
+      // slug = el.replace(/[\d_]+|.mdx/g, "");
+    }
+    if (!withVersion) {
+      slug = el.replace(/[\d_]+|.mdx/g, "");
+    }
+    console.log("slug:", slug);
+    // const slug = el.replace(/[\d_]+|.mdx/g, "");
 
     const fullPath = join(projectsDir, el);
 

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 
-interface SuccessToastProps {
+export interface SuccessToastProps {
   /**
    * the text that appears describing the success message
    */
@@ -27,15 +27,18 @@ interface SuccessToastProps {
   status?: AlertProps["status"];
 }
 
-export function CustomToast({
-  description = "I’ll get back to you as soon as possible",
-  title = "Message successfully sent",
-  status = "success",
-}: SuccessToastProps) {
+export function CustomToast(
+  props: SuccessToastProps = {
+    description: "I’ll get back to you as soon as possible",
+    title: "Message successfully sent",
+    status: "success",
+  }
+) {
+  const { description, title, status } = props;
   const toast = useToast();
   const toastIdRef = useRef();
   function close() {
-    console.log("toastIdRef:", toastIdRef);
+    // console.log("toastIdRef:", toastIdRef);
     toast.closeAll();
     if (toastIdRef.current) {
     }

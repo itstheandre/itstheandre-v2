@@ -91,7 +91,7 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
               <Heading as="h6" mb="1" fontSize="sm" fontFamily={TTMonoBold}>
                 Client
               </Heading>
-              <NextLink href="https://savorly.us">Savorly</NextLink>
+              <NextLink href={frontMatter.url}>{frontMatter.title}</NextLink>
             </Box>
           </GridItem>
           <GridItem>
@@ -105,14 +105,14 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
         </Grid>
         <Flex justify="center" mb="20" mt="10">
           <NextLink
-            href="https://savorly.us"
+            href={frontMatter.url}
             textDecor="none"
             _hover={{ textDecor: "none" }}
             referrerPolicy="no-referrer"
             isExternal
           >
             <Button variant="outline" textAlign="center">
-              Check all Projects
+              Check it out
             </Button>
           </NextLink>
         </Flex>

@@ -26,7 +26,6 @@ export const useProjects = create<ProjectState>(
      */
     showMore: (more) =>
       set((state) => {
-        console.log("adding more");
         state.showing += more;
       }),
     /**
