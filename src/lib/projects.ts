@@ -65,15 +65,43 @@ export function getSortedProjects() {
   }) as IProject[];
 }
 
+function retrieveSlug(el: string) {
+  const withVersion = el.match(/v\d-/gi);
+  if (withVersion) {
+    const slug = el.replace(/[\d_]+|v\d-|.mdx/g, "");
+
+    return `${withVersion[0]}${slug}`;
+  }
+  return el.replace(/[\d_]+|.mdx/g, "");
+}
+
 export const getAllProjectSlugs = () => {
   const fileNames = fs.readdirSync(projectsDir);
+  return fileNames.map((el) => {
+    const project = retrieveSlug(el);
+    return {
+      params: {
+        project,
+      },
+    };
+  });
   // const slug = el.replace(/[\d_]+|.mdx/g, "");
+  // const withVersion = el.match(/v\d-/);
+  // let slug;
 
-  return fileNames.map((el) => ({
-    params: {
-      project: el.replace(/[\d_]+|.mdx/g, ""),
-    },
-  }));
+  // if (withVersion) {
+  //   const removingVersion = el.replace(/[\d_]+|v\d-|.mdx/g, "");
+  //   slug = `${withVersion[0]}${removingVersion}`;
+  //   // slug = el.replace(/[\d_]+|.mdx/g, "");
+  // }
+  // if (!withVersion) {
+  //   slug = el.replace(/[\d_]+|.mdx/g, "");
+  // }
+  // return fileNames.map((el) => ({
+  //   params: {
+  //     project: el.replace(/[\d_]+|.mdx/g, ""),
+  //   },
+  // }));
 };
 
 export const getProjectData = (project: string) => {
