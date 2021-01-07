@@ -16,11 +16,10 @@ export function getSlugs() {
   return projects.map((e) => ({ params: { project: e.slug } }));
 }
 
-export function getSortedProjects() {
+export function getSortedProjects(howMany?: number) {
   const fileNames = fs.readdirSync(projectsDir);
 
   const allProjectsData = fileNames.map((el) => {
-    console.log(el.match(/v\d-/g));
     const withVersion = el.match(/v\d-/);
     let slug;
 
@@ -32,7 +31,6 @@ export function getSortedProjects() {
     if (!withVersion) {
       slug = el.replace(/[\d_]+|.mdx/g, "");
     }
-    console.log("slug:", slug);
     // const slug = el.replace(/[\d_]+|.mdx/g, "");
 
     const fullPath = join(projectsDir, el);
@@ -41,7 +39,7 @@ export function getSortedProjects() {
 
     const { data, content } = matter(fileContents);
 
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       // weekday: "long",
       year: "numeric",
       month: "long",
@@ -60,9 +58,10 @@ export function getSortedProjects() {
     };
   });
 
-  return allProjectsData.sort((a, b) => {
+  const sorted = allProjectsData.sort((a, b) => {
     return (b as any).order - (a as any).order;
   }) as IProject[];
+  return sorted.slice(0, howMany);
 }
 
 function retrieveSlug(el: string) {

@@ -18,8 +18,10 @@ import { IProject, ProjectType } from "../../shared/types";
 type WorkPageProject = ProjectType | "all";
 
 export default function Work({ projects }: { projects: IProject[] }) {
-  const isMedium = useIsMedium();
-  const { showing, showMore, showLess, selected, setSelected } = useProjects();
+  const { showing, showMore, showLess, selected, setSelected } = useProjects(
+    (state) => ({ ...state }),
+    shallow
+  );
   const [isSelected, setIsSelected] = useState(true);
   const isGrowing = showing <= projects.length;
   function addProjects() {

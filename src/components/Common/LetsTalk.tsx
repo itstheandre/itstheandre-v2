@@ -1,11 +1,4 @@
-import {
-  Flex,
-  Heading,
-  LayoutProps,
-  ResponsiveValue,
-  Text,
-} from "@chakra-ui/react";
-import { ReactText } from "react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { NextLink } from "./Links";
 
 interface LetsWorkProps {

@@ -6,7 +6,7 @@ import { IPost } from "../shared/types";
 
 const postsDir = path.join(process.cwd(), "src", "posts");
 
-export function getSortedPosts() {
+export function getSortedPosts(howMany?: number) {
   const fileNames = fs.readdirSync(postsDir);
 
   const allPostsData = fileNames.map((el) => {
@@ -33,9 +33,10 @@ export function getSortedPosts() {
     };
   });
 
-  return allPostsData.sort((a, b) =>
+  const sorted = allPostsData.sort((a, b) =>
     new Date(a.date) < new Date(b.date) ? 1 : -1
   ) as IPost[];
+  return sorted.slice(0, howMany);
 }
 
 export const getAllPostSlugs = () => {

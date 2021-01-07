@@ -23,4 +23,5 @@ export interface IPost {
   date: string | Date;
   excerpt: string;
   banner: string;
+  slug: string;
 }

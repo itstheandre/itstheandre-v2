@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import {
   Article,
-  BodyWrapper,
+  BlogWrapper,
   CommonText,
   NextLink,
   PageHeader,
@@ -30,18 +30,7 @@ const BlogIndex = ({ allPostsData }) => {
           <CommonText>random stuff</CommonText>.
         </PageHero>
       </PageHeader>
-      <BodyWrapper>
-        <SimpleGrid
-          columns={{ base: 1, md: 3 }}
-          justifyItems={{ base: "center", md: "flex-start" }}
-          spacingX="6"
-          spacingY="12"
-        >
-          {[...allPostsData, ...allPostsData, ...allPostsData].map((el) => (
-            <Article w="100%" key={el.slug} {...el} href={el.slug} />
-          ))}
-        </SimpleGrid>
-      </BodyWrapper>
+      <BlogWrapper posts={allPostsData} />
       <Box my="20em">
         <Flex
           justifyContent="center"

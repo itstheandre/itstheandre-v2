@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, Text } from "@chakra-ui/react";
 import { colors } from "./colors";
 import { config } from "./config";
 import { styles } from "./styles";
@@ -25,6 +25,12 @@ export const theme = extendTheme({
     },
   },
 });
+
+export const MyStroke = ({ children }) => (
+  <Text as="span" className="strokerText stroke">
+    {children}
+  </Text>
+);
 
 // baseStyle: {
 //   fontWeight: "bold",
