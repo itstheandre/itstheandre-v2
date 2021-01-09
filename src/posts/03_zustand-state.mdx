@@ -1,0 +1,171 @@
+---
+title: "Easier complex state management with zustand"
+date: "2021-01-09"
+author: "André de Albuquerque"
+excerpt: "After doing a couple of freelance projects where everything is managed by a gigantic context, I started looking at other alternatives"
+banner: "/images/blog/00/banner.png"
+---
+
+## React, we have a problem
+
+React.js has, let's say, a "situation" with the concept of `state`. First of all, it goes agains't the mental model of most beginners. You click on the button, and the number get's higher. That's it. Plain and simple. However, in the React land, even though it, actually, does that, designing this isn't as simple.
+
+First, you have to adhere to the flux style of data flow from React. After that, you **never** mutate state directly. And then, you need to call one function that, in the background and not in a synchronous fashion, is going to call "React" in oder for it to eventually rerender that specific component with the updated data. There, I managed to overly simplify and probably even butcher an explanation of state.
+
+After teaching state and seeing students learn about state enough times, you see that there are a couple of things that can be overwhelming but, even then, simple state (like the previous example with a button and a counter) eventually becomes easier to parse. And I am not talking about you, you super expert developer, I am talking from my own personal experience as somoene that had to learn state and to this day still tries making this topic easier to grasp.
+
+And then, we add other options to state and, provided they are not super tightly coupled on one component and it's still semi-easy to follow
+
+### And then we see forms.
+
+Before people that are learning React are willing to even look at things such as [React Hook Form](https://react-hook-form) or [Formik](https://formik.org), they first to understand what the hell is happening when managing state with forms. And they can go a couple of different routes:
+
+```jsx
+class LoginForm extends React.Component {
+  state = {
+    username: "",
+    password: "",
+  };
+
+  onUsernameChange = (event) => this.setState({ username: event.target.value });
+
+  onPasswordChange = (event) => this.setState({ password: event.target.value });
+
+  render() {
+    return (
+      <form>
+        <input
+          name="username"
+          placeholder="Add your username"
+          type="text"
+          value={this.state.username}
+          onChange={this.onUsernameChange}
+        />
+        <input
+          name="password"
+          placeholder="Add your password"
+          type="password"
+          value={this.state.password}
+          onChange={this.onPasswordChange}
+        />
+      </form>
+    );
+  }
+}
+```
+
+You look at this and you can see that it's "fine" to read. You don't understand why the inputs have a value property and where doest that `event` come from in the on`something`Change methods, but you can accept it, maybe... maybe not.
+
+As you might see, though, this is not the most scalable option. Not in a millions of users scalable, but in a multi part form. This would be a nightmare to manage.
+
+Then you learn you can use somem JSFoo to abstract away those methods into one single method:
+
+```jsx
+export class SignupForm extends React.Component {
+
+  onInputChange(event) => this.setState({[event.target.name]:event.target.value})
+}
+```
+
+And boom. Now you are a magician. You can add as many inputs to this component and, as long as you match the name property in each input to their respective keys in state, you are golden.
+
+## But then, passing state down
+
+Then you learn about passing the state down to child components and, voila, you're confused again.
+
+At one point, you become aware of the `Hooks` architecture and you see your eyes glow again. Everything is a function - much wow -, no more `this.` nonsense (not a nonsense, but by this time, there's no guarantee you fully grasp the this keyword yet) - much wowness -, and, usually, smaller componentes (in terms of lines written at least).
+
+You now have a component decision to take, though. Because each state can be whatever shape, you can now have individual pieces of state for each `key` in the previous state. Like this:
+
+```jsx
+const [username, setUsername] = React.useState("");
+const [password, setPassword] = React.useState("");
+```
+
+Which, in practice, has the same scalability situation:
+
+```jsx
+function onInputChange(event) {
+  if (event.target.name === "username") {
+    setUsername(event.target.value);
+  }
+  if (event.target.name === "password") {
+    setPassword(event.target.value);
+  }
+}
+```
+
+Why do we do this? Becaues you first try to see what happens if you put it all in one object, and the moment you edit one input (if you do the previous class component style), you lose the other key. For example:
+
+```jsx
+const [myFormState, setMyFormState] = React.useState({
+  username:"",
+  password:""
+})
+
+function onInputChange(event){
+  setMyFormState({[event.target.name]:event.target.value})
+}
+// makes changes to username input:
+console.log(myFormState) // {username:""}
+
+// makes change to password input
+console.log(myFormState // {password: ""})
+```
+
+It's not directly clear why if you change the username input, you lose the password property. The reason for this is that the second returned value from the `useState` hook is a full updater function. Whatever value that function has as an argument, or internal function, will be the **new** value of the first returned value.
+
+Your solution is to basically `spread` the previous version of that form state and then, dynamically, updating the right key.
+
+```js
+function onInputChange(event) {
+  setMyFormState({ ...myFormState, [event.target.name]: event.target.value });
+}
+```
+
+Another way to do this would be:
+
+```js
+function onInputChange(event) {
+  setMyFormState((prevVersion) => ({
+    ...prevVersion,
+    [event.target.name]: event.target.value,
+  }));
+}
+```
+
+###
+
+## Zuswhat?
+
+lorem  
+ Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ut vero eos molestiae, dicta odit.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ut vero eos molestiae, dicta odit.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ut vero eos molestiae, dicta odit.
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ut vero eos molestiae, dicta odit.
+
+```jsx
+export default function Hello({ name }) {
+  return <h1>Hello{name} </h1>;
+}
+```
+
+```ts
+const thisIsAString: string = "Hello";
+console.log(thisIsAString);
+```
+
+<Project />
+
+```jsx
+export default function Hello({ name }) {
+  return <h1>Hello{name} </h1>;
+}
+```
+
+Hello
+
+```ts
+const thisIsAString: string = "Hello";
+console.log(thisIsAString);
+```

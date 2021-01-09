@@ -1,0 +1,216 @@
+---
+title: "React Forms are not fun, here's how to make them more bearable"
+date: "2021-01-09"
+author: "André de Albuquerque"
+excerpt: "Why I prefer to use React Hook Form and Formik for my forms"
+banner: "/images/blog/00/banner.png"
+---
+
+## Forms, the first big frontier
+
+Let's face it. Learning how to do forms in React.js is just a pain in the neck, back and ass... All at the same time. It's a weird mental model, it's a weird syntax with multiple different things that are just being thrown to you and you get confused and lost
+
+The first time I saw forms in react I remember feeling like the whole thing didn't make any sense - value properties being passed to inputs when the values are empty initially. Input onChange methods that are targeting each individual input. The `.this` keyword all over the place - yeah, I started learning React.js in the pre-hook era. Not that long ago, mind you, but in Javascript life, I am glad to at least, be considered a teenager.
+
+And then managing state, and how to perform validation, and all that jazz.
+
+Now, state will be a post that I might write my opinion on eventually, but for now, forms is where I want to focus on.
+
+Let's start with the basics:
+
+> At least 90% of websites online have one domain
+>
+> - Albuquerque, A. 2021 (not sources anywhere, just from my mind)
+
+If you read the previous quote from, clearly a genius way ahead of the time, if all websites need a form, we need to learn forms. Dealing with forms is a pain, therefore - building 90% of websites at one point is a huge pain.
+
+That is true, however, it doesn't have to be because of forms. Let's see the flow from start and then what I have used and liked the most
+
+### And then we see forms.
+
+Before people that are learning React are willing to even look at things such as [React Hook Form](https://react-hook-form) or [Formik](https://formik.org) - more on these two later, they first to understand what the hell is happening when managing state with forms. And they can go a couple of different routes:
+
+```jsx
+class LoginForm extends React.Component {
+  state = {
+    username: "",
+    password: "",
+  };
+
+  onUsernameChange = (event) => this.setState({ username: event.target.value });
+
+  onPasswordChange = (event) => this.setState({ password: event.target.value });
+
+  render() {
+    return (
+      <form>
+        <input
+          name="username"
+          placeholder="Add your username"
+          type="text"
+          value={this.state.username}
+          onChange={this.onUsernameChange}
+        />
+        <input
+          name="password"
+          placeholder="Add your password"
+          type="password"
+          value={this.state.password}
+          onChange={this.onPasswordChange}
+        />
+      </form>
+    );
+  }
+}
+```
+
+You look at this and you can see that it's "fine" to read. You don't understand why the inputs have a value property and where does that `event` come from in the on`something`Change methods, but you can accept it, maybe... maybe not.
+
+As you might see, though, this is not the most scalable option. Not in millions of users scalable, but in a multi-part form. This would be a nightmare to manage.
+
+Then you learn you can use some JSFoo to abstract away those methods into one single method:
+
+```jsx
+export class SignupForm extends React.Component {
+
+  onInputChange(event) => this.setState({[event.target.name]:event.target.value})
+}
+```
+
+And boom. Now you are a magician. You can add as many inputs to this component and, as long as you match the name property in each input to their respective keys in state, you are golden.
+
+## But then, passing state down
+
+Then you learn about passing the state down to child components and, voila, you're confused again.
+
+At one point, you become aware of the `Hooks` architecture and you see your eyes glow again. Everything is a function - much wow -, no more `this.` nonsense (not nonsense, but by this time, there's no guarantee you fully grasp the "this" keyword yet) - much wowness -, and, usually, smaller components (in terms of lines written at least).
+
+You now have a component decision to take, though. Because each state can be whatever shape, you can now have individual pieces of state for each `key` in the previous state. Like this:
+
+```jsx
+const [username, setUsername] = React.useState("");
+const [password, setPassword] = React.useState("");
+```
+
+Which, in practice, has the same scalability situation:
+
+```jsx
+function onInputChange(event) {
+  if (event.target.name === "username") {
+    setUsername(event.target.value);
+  }
+  if (event.target.name === "password") {
+    setPassword(event.target.value);
+  }
+}
+```
+
+Why do we do this? Because you first try to see what happens if you put it all in one object, and the moment you edit one input (if you do the previous class component style), you lose the other key. For example:
+
+```jsx
+const [myFormState, setMyFormState] = React.useState({
+  username:"",
+  password:""
+})
+
+function onInputChange(event){
+  setMyFormState({[event.target.name]:event.target.value})
+}
+// makes changes to username input:
+console.log(myFormState) // {username:""}
+
+// makes change to password input
+console.log(myFormState // {password: ""})
+```
+
+It's not directly clear why if you change the username input, you lose the password property. The reason for this is that the second returned value from the `useState` hook is a full updater function. Whatever value that function has as an argument, or internal function, will be the **new** value of the first returned value.
+
+Your solution is to basically `spread` the previous version of that form state and then, dynamically, updating the right key.
+
+```js
+function onInputChange(event) {
+  setMyFormState({ ...myFormState, [event.target.name]: event.target.value });
+}
+```
+
+Another way to do this would be:
+
+```js
+function onInputChange(event) {
+  setMyFormState((prevVersion) => ({
+    ...prevVersion,
+    [event.target.name]: event.target.value,
+  }));
+}
+```
+
+### Taking the tears out of building forms in react
+
+Now, this paraphrasing of the Formik library is on purpose. I believe both Formik and React-Hook-Form have nice approaches to making react forms easier to "digest".
+
+This is Formik's approach on their home page:
+
+```jsx
+import { Formik, Field, Form } from "formik";
+
+function App() {
+  return (
+    <div className="App">
+      <h1>Contact Us</h1>
+      <Formik
+        initialValues={{ name: "", email: "" }}
+        onSubmit={async (values) => {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          alert(JSON.stringify(values, null, 2));
+        }}
+      >
+        <Form>
+          <Field name="name" type="text" />
+          <Field name="email" type="email" />
+          <button type="submit">Submit</button>
+        </Form>
+      </Formik>
+    </div>
+  );
+}
+```
+
+See? No need for state, just a couple of props on to the Formic Component and then a couple of other components on the page (for the Form itself and the Fields) and voila. Internally it's controlling state and it can even do validation.
+
+The React Hook Form in another hand, uses, at least for my mental model, an even easier way to do forms:
+
+```jsx
+import { useForm } from "react-hook-form";
+
+export default function App() {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => alert(JSON.stringify(data));
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input name="firstName" ref={register} placeholder="First name" />
+
+      <input name="lastName" ref={register} placeholder="Last name" />
+
+      <select name="category" ref={register}>
+        <option value="">Select...</option>
+        <option value="A">Category A</option>
+        <option value="B">Category B</option>
+      </select>
+
+      <input type="submit" />
+    </form>
+  );
+}
+```
+
+We just need to pass that `register` as a ref to the inputs and that's it. The `useForm` hook will take care of that. And, like Formik, you can also do validation.
+
+Both libraries also take care of the preventing of the default behaviour of forms on the web - they cause a refresh of the page - that's why you're always putting the `event.preventDefault()` on every onSubmit function of forms in react.
+
+I am not saying that learning how to handle react forms have to be handled with either React Hook Form, or Formik, but the amount of time and code that these libraries abstract from us makes them invaluable.
+
+You might not agree with me, but hopefully, this opened your eyes to some struggles you might have been having or, at the very least, confirmed your assumption. If you don't agree, well, it's your right 😃!
+
+Happy coding
