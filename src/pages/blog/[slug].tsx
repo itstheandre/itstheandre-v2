@@ -32,14 +32,19 @@ export default function Posts({ source, frontMatter }) {
       <Head>
         <title>{frontMatter.title}</title>
       </Head>
-      <AspectRatio w="100%" ratio={1232 / 416}>
+      <AspectRatio
+        w="100%"
+        ratio={1232 / 500}
+        borderRadius="10px"
+        overflow="hidden"
+      >
         {/* <div /> */}
         <Box h="100%" w="100%" overflow="hidden">
           <Image
             src={frontMatter.banner}
             objectFit="cover"
             width={1232}
-            height={416}
+            height={500}
           />
           <Flex
             bg={color}
@@ -57,7 +62,22 @@ export default function Posts({ source, frontMatter }) {
           </Flex>
         </Box>
       </AspectRatio>
-      <Box mt="20" mb="48"></Box>
+      <Box mt="20" mb="48" px="20rem">
+        {content}
+        <Heading as="h3" mt="20">
+          As a good bye, I would like to leave you with this image, that I
+          believe it says it all:
+        </Heading>
+        <Box mt="10">
+          <Image
+            src={frontMatter.mainImg}
+            layout="responsive"
+            height="70%"
+            width="100%"
+          />
+        </Box>
+      </Box>
+
       <Flex justify="center">
         <Heading as="h3" fontSize="5xl">
           <NextLink href="/blog">

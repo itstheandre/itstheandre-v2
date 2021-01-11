@@ -37,7 +37,7 @@ export default function Home({ projects, posts }: HomeProps) {
             un
           </Text>
           healthy obsession with code, to the point that I am continuously{" "}
-          <MyStroke>tinkering</MyStroke>,{" "}
+          {/* <MyStroke>tinkering</MyStroke>,{" "} */}
           <NextLink href="/blog">
             <MyStroke>writing</MyStroke>
           </NextLink>

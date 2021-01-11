@@ -14,7 +14,157 @@ First, you have to adhere to the flux style of data flow from React. After that,
 
 After teaching state and seeing students learn about state enough times, you see that there are a couple of things that can be overwhelming but, even then, simple state (like the previous example with a button and a counter) eventually becomes easier to parse. And I am not talking about you, you super expert developer, I am talking from my own personal experience as somoene that had to learn state and to this day still tries making this topic easier to grasp.
 
-And then, we add other options to state and, provided they are not super tightly coupled on one component and it's still semi-easy to follow
+After a while, state becomes easier to follow and then... BOOM, passing the state down. After a while, you hear about Redux, BOOM! Context, BOOM! Async state and local state, BOOM. Side effects, global state, all that. Just Ka-boom all over the place.
+
+### First things first
+
+I don't have any prejudice against React Context, Redux, Apollo, Relay, whatever. They all are trying to solve one problem and, depending on the problem, we can go to one or the other. Like everything, there is no direct final answer. [It Depends](/blog/it-depends)
+
+Now, one of the reasons why I am going to be writing about Zustand is very simple. It's because it's simple. It's so simple. It has a very nice API footprint, and, more important (at least for me) it doesn't make me wrap the components in providers when I am writing tests.
+
+That piece of state becomes as available as you need it and there it is, **simple**.
+
+### What does it look like?
+
+First, we need to install it:
+
+```bash
+FAVORITE_PACKAGE_MANAGER install zustand
+```
+
+And then, in a file (I advise file) because it will be the main one that will be focused on that state. No need to put everything in one file.
+
+```ts
+import create from "zustand";
+
+const useStore = create((set) => ({
+  isWorking: true,
+  toggleWorking: () => set((state) => ({ isWorking: !isWorking })),
+}));
+```
+
+And there, now we can just retrieve those two variables anywhere in the whole application - navbar, footer, 10000m nested inside other components. It just works. And that is one of the promises that I had when I started learning React. And now I know that **IT DEPENDS**.
+
+```tsx
+function NavBar() {
+  const isWorking = useStore(state => state.isWorking)
+  return (
+    <div>I am{isWorking?"" : " not"} working
+  );
+}
+```
+
+```tsx
+function SuperNestedComponent() {
+  const toggleWorking = useStore((state) => state.toggleWorking);
+  const isWorking = useStore((state) => state.isWorking);
+  return (
+    <div>
+      {isWorking ? (
+        <>Maybe take a break. Click → </>
+      ) : (
+        <>Well, back to work →</>
+      )}{" "}
+      <button onClick={toggleWorking}>REST A LITTLE</button>
+    </div>
+  );
+}
+```
+
+As you can see these components are connected, but if we are to analyze the root component, no provider. Plain and simple react.
+
+### Final spinkles of brilliance for whenever we setup the initial useStore
+
+Have you ever heard of immer?
+
+If not, you should take a look at it. Not because it's going to save the world. But, at least in my opinion, it makes React state look closer to javascript objects and arrays.
+
+### What? They are objects and arrays!
+
+That's true, but since we work in an environment where they are not mutable (or shouldn't mutated), it's the same thing as you telling me they are strings or numbers. But immer, uses some underlying strategies that, whatever you mutate there, it will return the final state. Look at this example from their [docs](https://immerjs.github.io/immer/docs/introduction)
+
+```tsx
+import produce from "immer";
+
+const baseState = [
+  {
+    todo: "Learn typescript",
+    done: true,
+  },
+  {
+    todo: "Try immer",
+    done: false,
+  },
+];
+
+const nextState = produce(baseState, (draftState) => {
+  draftState.push({ todo: "Tweet about it" });
+  draftState[1].done = true;
+});
+```
+
+I don't know about you, but for me this just makes me smile and giggle a little. You can trade this:
+
+```tsx
+// imagine in a reducer
+case "CHANGE_NESTED":{
+  return {
+    ...state,
+    projects: state.projects.map(project => {
+      if (project.exams[1].id === action.payload.id) {
+        return {...project, exams: project.exams.map(exam => exam.id === action.payload.id ? {...exam, extra:action.payload.extra} : {...el})}
+      }
+      return project
+    })
+  }
+}
+
+```
+
+Imagine this nested nightmare where you have to look 58 times just to try to follow vs:
+
+```tsx
+product(baseState, (draftState) => {
+  draftState[projectId].exames[id].extra = extra;
+});
+```
+
+For me this is so much more readable.
+
+Now, let's do some magic.
+
+Let's put both Zustand and Immer to work, and prepare to cry (of happiness):
+
+NOTICE HERE, I didn't think of this, it's on [Zustand's repo](https://github.com/pmndrs/zustand)
+
+```tsx
+import { State, StateCreator } from "zustand";
+import produce, { Draft } from "immer";
+
+const immer = <T extends State>(
+  config: StateCreator<T, (fn: (draft: Draft<T>) => void) => void>
+): StateCreator<T> => (set, get, api) =>
+  config((fn) => set(produce(fn) as (state: T) => T), get, api);
+
+interface WorkingState {
+  isWorking: boolean;
+  toggleWorking: () => void;
+}
+
+const useStore = create<WorkingState>(
+  immer((set) => ({
+    isWorking: false,
+    toggleWorking: () =>
+      set((state) => {
+        state.isWorking = !state.isWorking;
+      }),
+  }))
+);
+```
+
+And that's it. Nowadays if I am building a simple application and want to go for speed of coding, even if I am writing in Typescript, I go got Zustand and Immer.
+
+Happy coding
 
 ### And then we see forms.
 

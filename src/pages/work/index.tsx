@@ -69,7 +69,7 @@ export default function Work({ projects }: { projects: IProject[] }) {
           >
             apps
           </Text>
-          ,{" "}
+          {/* ,{" "}
           <Text
             cursor="pointer"
             as="span"
@@ -78,7 +78,7 @@ export default function Work({ projects }: { projects: IProject[] }) {
             color={selected === "oss" ? "brand.main" : ""}
           >
             open source packages
-          </Text>
+          </Text> */}
           , or just check{" "}
           <Text
             cursor="pointer"
@@ -93,10 +93,10 @@ export default function Work({ projects }: { projects: IProject[] }) {
       </PageHeader>
 
       {projects
-        .slice(0, showing)
         .filter((el) =>
           selected === "all" ? el.type.includes("") : el.type.includes(selected)
         )
+        .slice(0, showing)
         .map((el, i, { length }) => {
           return (
             <Project

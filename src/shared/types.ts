@@ -24,4 +24,5 @@ export interface IPost {
   excerpt: string;
   banner: string;
   slug: string;
+  mainImg: string;
 }
