@@ -10,18 +10,16 @@ interface BlogWrapperProps {
 }
 
 export const BlogWrapper: React.FC<BlogWrapperProps> = (props) => {
-  const { isHome, posts } = props;
-  console.log("isHome:", isHome);
-  const allPosts = isHome ? posts : [...posts, ...posts, ...posts];
+  const { posts, isHome = false } = props;
   return (
     <BodyWrapper>
       <SimpleGrid
-        columns={{ base: 1, md: allPosts.length > 3 ? 3 : allPosts.length }}
+        columns={{ base: 1, md: posts.length > 3 ? 3 : posts.length }}
         justifyItems={{ base: "center", md: isHome ? "center" : "flex-start" }}
         spacingX="6"
         spacingY="12"
       >
-        {allPosts.map((el) => (
+        {posts.map((el) => (
           <Article w="100%" key={el.slug} {...el} href={el.slug} />
         ))}
       </SimpleGrid>

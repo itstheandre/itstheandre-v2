@@ -15,6 +15,7 @@ export function getSortedPosts(howMany?: number) {
 
     const fileContents = fs.readFileSync(fullPath, "utf-8");
     const { data, content } = matter(fileContents);
+    const { text } = readingTime(content);
 
     const options = {
       year: "numeric",
@@ -25,7 +26,11 @@ export function getSortedPosts(howMany?: number) {
       "UTC",
       options
     );
-    const frontmatter: IPost = { ...(data as IPost), date: formattedDate };
+    const frontmatter: IPost = {
+      ...(data as IPost),
+      date: formattedDate,
+      time: text,
+    };
 
     return {
       slug,
@@ -57,5 +62,11 @@ export const getPostData = async (slug: string) => {
   const fullPath = path.join(postsDir, currentPost);
   const postContent = fs.readFileSync(fullPath, "utf8");
 
-  return postContent;
+  const { data, content } = matter(postContent);
+  const { text } = readingTime(content);
+
+  return {
+    data: { ...data, time: text },
+    content,
+  };
 };

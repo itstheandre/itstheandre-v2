@@ -79,6 +79,17 @@ export default function Home({ projects, posts }: HomeProps) {
           Latest articles
         </Heading>
         <BlogWrapper posts={posts} isHome />
+        <Flex mt={10} justifyContent="center">
+          <NextLink
+            href="/blog"
+            textDecor="none"
+            _hover={{ textDecor: "none" }}
+          >
+            <Button variant="outline" textAlign="center">
+              Read them all
+            </Button>
+          </NextLink>
+        </Flex>
       </Box>
 
       <LetsWork />

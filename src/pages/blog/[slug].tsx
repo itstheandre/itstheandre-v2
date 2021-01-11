@@ -21,9 +21,15 @@ import {
   Project,
 } from "../../components";
 import { getAllPostSlugs, getPostData } from "../../lib/posts";
+import { IPost, IProject } from "../../shared/types";
 const components = { Project: Project };
 
-export default function Posts({ source, frontMatter }) {
+interface SlugProps {
+  source: string;
+  frontMatter: IPost;
+}
+
+export default function Posts({ source, frontMatter }: SlugProps) {
   const { colorMode } = useColorMode();
   const color = colorMode === "dark" ? "gray.800" : "gray.50";
   const content = hydrate(source, { components });
@@ -56,7 +62,7 @@ export default function Posts({ source, frontMatter }) {
             align="center"
           >
             <BodyWrapper>
-              <PageIntro>15 minutes</PageIntro>
+              <PageIntro>{frontMatter.time}</PageIntro>
               <PageHero>{frontMatter.title}</PageHero>
             </BodyWrapper>
           </Flex>
@@ -70,7 +76,7 @@ export default function Posts({ source, frontMatter }) {
         </Heading>
         <Box mt="10">
           <Image
-            src={frontMatter.mainImg}
+            src={frontMatter.mainImg || frontMatter.banner}
             layout="responsive"
             height="70%"
             width="100%"
@@ -125,18 +131,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const postContent = await getPostData(params.slug);
-  const { data, content } = matter(postContent);
+  const { data, content } = await getPostData(params.slug);
   const mdxSource = await renderToString(content, {
     components,
     scope: data,
   });
-  const { text } = readingTime(content);
 
   return {
     props: {
       source: mdxSource,
-      frontMatter: { ...data, time: text },
+      frontMatter: data,
     },
   };
 }

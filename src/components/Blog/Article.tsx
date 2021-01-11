@@ -9,6 +9,7 @@ interface ArticleProps {
   banner: string;
   href: string;
   w?: string;
+  time: string;
 }
 
 export const Article: FC<ArticleProps> = (
@@ -17,8 +18,10 @@ export const Article: FC<ArticleProps> = (
     href: "00_first",
     banner: "/images/blog/00/banner.png",
     w: "",
+    time: "",
   }
 ) => {
+  console.log("props:", props);
   const link = `/blog/${props.href}`;
   return (
     <NextLink href={link}>
@@ -40,7 +43,7 @@ export const Article: FC<ArticleProps> = (
 
         <Box as="section" mt="4">
           <Text fontSize="md" color="gray.400">
-            <EmojiWrapper>⏰</EmojiWrapper> 15 minutes
+            <EmojiWrapper>⏰</EmojiWrapper> {props.time}
           </Text>
           <Heading as="h3" fontSize="xl" variant="mono" lineHeight="8">
             {props.title}
