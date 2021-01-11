@@ -16,6 +16,7 @@ export interface IProject {
   type: ProjectType;
   technologies: string[];
   url: string;
+  time: string;
 }
 
 export interface IPost {

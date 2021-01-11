@@ -7,6 +7,7 @@ import {
   FormLabel,
   Input,
   useColorMode,
+  Textarea,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { sendForm } from "../service";
@@ -47,62 +48,17 @@ export default function Contact() {
     if (obj.status === "error" && !obj.showError) {
       return;
     }
-    // if (obj.status === "error") {
     return myToast({
       render: () => <CustomToast {...obj} />,
     });
-    // }
-    // console.log("e:", e);
-    // if (e.meName || e.phone) {
-    //   return;
-    // }
-    // const isEmail = validator.isEmail(e.email);
-    // if (!isEmail) {
-    //   return myToast({
-    //     render: () => (
-    //       <CustomToast
-    //         status="error"
-    //         title="Please type in a valid email"
-    //         description="The email you wrote is not a valid email"
-    //       />
-    //     ),
-    //   });
-    // }
-    // if (!validator.isLength(e.name, { min: 5 })) {
-    //   return myToast({
-    //     render: () => (
-    //       <CustomToast
-    //         status="error"
-    //         title="The name is too short"
-    //         description="The name field must have a minimum 5 characters"
-    //       />
-    //     ),
-    //   });
-    // }
-    // if (!validator.isLength(e.message, { min: 20 })) {
-    //   return myToast({
-    //     render: () => (
-    //       <CustomToast
-    //         status="error"
-    //         title="Message too short"
-    //         description="The message field must have a minumum of 20 characters"
-    //       />
-    //     ),
-    //   });
-    // }
-    // try {
-    // } catch (error) {}
-    // myToast({
-    //   render: () => <CustomToast status="success" />,
-    // });
   });
   return (
     <>
       <PageHeader>
         <PageIntro>Let's chat 💬</PageIntro>
         <PageHero>
-          If you have a project for me, or just want to grab a coffee and talk
-          about Christopher Nolan, feel free to{" "}
+          If you have a project for me, or just want chat and nerd about coding
+          or cinema, feel free to{" "}
           <NextLink
             href="mailto:code@itstheandre.com"
             cursor="pointer"
@@ -198,7 +154,6 @@ export default function Contact() {
             fontSize="20px"
             mt="4"
             fontFamily={TTRegBold}
-            color="white"
             borderBottomColor={colorMode === "dark" ? "white" : "gray.900"}
             placeholder="Write what you want here"
             _placeholder={{
@@ -211,6 +166,29 @@ export default function Contact() {
             ref={register}
             name="message"
           />
+          {/* <Textarea
+            type="text"
+            border="none"
+            borderBottom="1px"
+            borderRadius="0"
+            py="2"
+            pl="2"
+            fontSize="20px"
+            mt="4"
+            fontFamily={TTRegBold}
+            color="white"
+            borderBottomColor={colorMode === "dark" ? "white" : "gray.900"}
+            placeholder="Write what you want here"
+            _placeholder={{
+              color: colorMode === "dark" ? "gray.600" : "gray.300",
+              textAlign: "left",
+              fontSize: "20px",
+            }}
+            _active={{ bg: "none" }}
+            _focus={{ outline: "none" }}
+            ref={register}
+            name="message"
+          /> */}
         </FormControl>
         <FormControl
           id="phone"

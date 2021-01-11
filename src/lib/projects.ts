@@ -38,6 +38,7 @@ export function getSortedProjects(howMany?: number) {
     const fileContents = fs.readFileSync(fullPath, "utf-8");
 
     const { data, content } = matter(fileContents);
+    const { text } = readingTime(content);
 
     const options: Intl.DateTimeFormatOptions = {
       // weekday: "long",
@@ -50,7 +51,11 @@ export function getSortedProjects(howMany?: number) {
       "UTC",
       options
     );
-    const frontmatter = { ...data, date: formattedDate };
+    const frontmatter = {
+      ...(data as IProject),
+      date: formattedDate,
+      time: text,
+    };
 
     return {
       slug,

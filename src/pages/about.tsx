@@ -35,13 +35,30 @@ export default function About() {
         mb={{ base: "8em", lg: "10em" }}
         pos="relative"
       >
+        <Box zIndex="-1" h="100%" pos="absolute" w="100%">
+          <Box h="100%">
+            <NextImage
+              src="/images/about/me.jpg"
+              layout="fill"
+              objectFit="cover"
+              quality={100}
+            />
+          </Box>
+          <Box
+            h="100%"
+            w="100%"
+            bg={colorMode === "dark" ? "gray.800" : "gray.50"}
+            position="absolute"
+            top="0"
+            opacity="0.8"
+          />
+        </Box>
         <Box px={{ lg: "8em", xl: "7em" }}>
           <Heading
             as="h5"
             variant="mono"
             fontSize={{ base: "md", sm: "xl", xl: "2xl" }}
             mb={1}
-            color="white"
             zIndex="1"
           >
             {greetings}
@@ -50,7 +67,6 @@ export default function About() {
             as="h2"
             fontSize={{ base: "3xl", sm: "4xl", lg: "5xl", xl: "6xl" }}
             zIndex="1"
-            color="white"
           >
             It's the André here
           </Heading>
@@ -70,34 +86,13 @@ export default function About() {
               <GithubIcon w="5" h="5" />
             </NextLink>
           </HStack>
-          <Box
-            ratio={1 / 2}
-            overflow="hidden"
-            pos="absolute"
-            h="100%"
-            w="100%"
-            top="0"
-            left="0"
-            zIndex="-1"
-          >
-            <Box h="100%" d={{ base: "none", md: "block" }}>
-              <NextImage
-                src="/images/about/dark-hero.png"
-                layout="fill"
-                objectFit="cover"
-                quality={100}
-              />
-            </Box>
-            <Box h="100" d={{ base: "block", md: "none" }}>
-              <NextImage
-                src="/images/about/dark-hero-2.png"
-                layout="fill"
-                objectFit="cover"
-                quality={100}
-              />
-            </Box>
-          </Box>
         </Box>
+        {colorMode === "light" && (
+          <Text px={{ lg: "8em", xl: "7em" }} pos="absolute" bottom="4">
+            * as like ALL developers, I prefer Dark Mode because Light attracts
+            bugs
+          </Text>
+        )}
       </Flex>
       <Box>
         <Heading
