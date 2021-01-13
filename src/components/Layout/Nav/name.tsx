@@ -1,6 +1,5 @@
-import { Box, Heading, Text, useMediaQuery } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { NextLink } from "../../Common/Links";
-import { TTMonoBold } from "../../../theme/utils/fonts";
 
 export const NameLink = () => {
   return (

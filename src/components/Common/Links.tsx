@@ -1,6 +1,6 @@
 import { Link, LinkProps as ChakraLinkProps } from "@chakra-ui/react";
 import NLink, { LinkProps as NextLinkProps } from "next/link";
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, PropsWithChildren } from "react";
 
 export type Mapped<T> = {
   readonly [P in keyof T]?: T[P];
@@ -9,10 +9,6 @@ export type Mapped<T> = {
 type NextLinkProps2 = ChakraLinkProps & {
   href?: string;
 };
-
-// const props: LinkProps = {
-//   text,
-// };
 
 export type NextChakraLinkProps = PropsWithChildren<
   NextLinkProps & ChakraLinkProps

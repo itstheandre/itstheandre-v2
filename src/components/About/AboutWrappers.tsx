@@ -1,5 +1,5 @@
-import { Text, Flex, Heading } from "@chakra-ui/react";
-import { FC, ReactNode } from "react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
+import { ReactNode } from "react";
 import { TTMonoBold } from "../../theme/utils/fonts";
 
 interface AboutWrapperProps {

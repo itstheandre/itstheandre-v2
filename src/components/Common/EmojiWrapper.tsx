@@ -1,5 +1,5 @@
 import { Text } from "@chakra-ui/react";
-import React, { FC } from "react";
+import { FC } from "react";
 
 export const EmojiWrapper: FC = ({ children }) => {
   return (

@@ -1,18 +1,6 @@
+import { Badge, Box, Heading, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import { useState } from "react";
-import {
-  Badge,
-  Box,
-  Flex,
-  Grid,
-  Heading,
-  SimpleGrid,
-  Text,
-  useColorMode,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
-import { TechUsed } from "../../Icons";
-import { MyIcons } from "../../Icons";
+import { MyIcons, TechUsed } from "../../Icons";
 import { TTMonoBold } from "../../theme/utils/fonts";
 
 export const AboutTechnologies = () => {

@@ -4,7 +4,7 @@ import { MyIconProps } from "./interface";
 import { clean } from "./util";
 
 export const P5Icon: FC<MyIconProps> = ({ ...props }) => {
-  const { title, myDesc, ariaLabel } = clean(props);
+  const { ariaLabel } = clean(props);
   return (
     <Icon
       {...props}

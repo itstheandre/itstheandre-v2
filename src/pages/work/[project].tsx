@@ -26,8 +26,8 @@ import {
 } from "../../components";
 import { TLDR } from "../../components/MDXComps";
 import { getAllProjectSlugs, getProjectData } from "../../lib/projects";
-import { TTMonoBold } from "../../theme/utils/fonts";
 import { IProject } from "../../shared/types";
+import { TTMonoBold } from "../../theme/utils/fonts";
 
 const components = {
   TLDR,

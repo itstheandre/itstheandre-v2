@@ -1,7 +1,7 @@
+import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import validator from "validator";
 import { IContactForm } from "../../utils";
-import axios from "axios";
 
 interface Request extends NextApiRequest {
   body: IContactForm;

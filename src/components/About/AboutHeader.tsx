@@ -1,17 +1,9 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, useColorMode } from "@chakra-ui/react";
 import NextImage from "next/image";
 import * as React from "react";
 import { useIsLarge, useIsMedium } from "../../hooks";
 // import { ReactIcon } from "../../Icons/TechIcons/React.icon";
 import { TTRegBold } from "../../theme/utils/fonts";
-
 export function AboutHeader() {
   const medium = useIsMedium();
   const large = useIsLarge();

@@ -1,5 +1,5 @@
 import { Badge, Box, Button, Divider, Flex, Heading } from "@chakra-ui/react";
-import { Nav } from "../components";
+import { Nav } from "../src/components";
 
 function ComponentsPage() {
   return (

@@ -1,8 +1,8 @@
-import { Flex, Box, Heading, Text, Button } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useState } from "react";
+import shallow from "zustand/shallow";
 import {
   LetsWork,
   PageHeader,
@@ -10,8 +10,7 @@ import {
   PageIntro,
   Project,
 } from "../../components";
-import shallow from "zustand/shallow";
-import { useIsMedium, useProjects } from "../../hooks";
+import { useProjects } from "../../hooks";
 import { getSortedProjects } from "../../lib/projects";
 import { IProject, ProjectType } from "../../shared/types";
 

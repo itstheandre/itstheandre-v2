@@ -1,8 +1,6 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import Head from "next/head";
-import { MyStroke } from "../theme";
 import {
-  BlogWrapper,
   LetsWork,
   NextLink,
   PageHeader,
@@ -12,7 +10,7 @@ import {
 } from "../components";
 import { getSortedProjects } from "../lib/projects";
 import { IPost, IProject } from "../shared/types";
-import { getSortedPosts } from "../lib/posts";
+import { MyStroke } from "../theme";
 
 interface HomeProps {
   projects: IProject[];

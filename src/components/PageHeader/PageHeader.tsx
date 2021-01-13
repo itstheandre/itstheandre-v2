@@ -1,6 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { FC } from "react";
-import { useIsMedium } from "../../hooks";
 
 interface PageHeaderProps {
   homePage?: boolean;
@@ -11,8 +10,6 @@ export const PageHeader: FC<PageHeaderProps> = ({
   children,
   homePage = false,
 }) => {
-  const isMedium = useIsMedium();
-
   const height = homePage ? "100vh" : "80vh";
 
   return (

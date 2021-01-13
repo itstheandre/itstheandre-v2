@@ -1,5 +1,5 @@
-import { State, StateCreator } from "zustand";
 import produce, { Draft } from "immer";
+import { State, StateCreator } from "zustand";
 
 export const immer = <T extends State>(
   config: StateCreator<T, (fn: (draft: Draft<T>) => void) => void>

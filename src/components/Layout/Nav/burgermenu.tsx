@@ -7,10 +7,7 @@ import {
   Heading,
   useColorMode,
 } from "@chakra-ui/react";
-import {
-  //   BurgerSlices,
-  StyledBurger,
-} from "../../../theme/custom/burger.button";
+import { StyledBurger } from "../../../theme/custom/burger.button";
 import { StrokerBox } from "../../../theme/custom/stroker.div";
 import { NextLink } from "../../Common";
 import { useMenu } from "../Layout";

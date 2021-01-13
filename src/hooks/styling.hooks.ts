@@ -1,4 +1,4 @@
-import { useMediaQuery } from "@chakra-ui/react";
+import { useMediaQuery } from "@solx/use-media-query";
 
 /**
  * This hook is just going to check if we are above the medium size that chakra uses internally

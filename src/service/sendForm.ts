@@ -1,7 +1,7 @@
-import { IContactForm } from "../utils";
-import validator from "validator";
 import axios from "axios";
+import validator from "validator";
 import { SuccessToastProps } from "../components";
+import { IContactForm } from "../utils";
 
 interface ISendForm extends SuccessToastProps {
   showError?: boolean;

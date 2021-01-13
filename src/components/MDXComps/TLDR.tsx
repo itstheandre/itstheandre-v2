@@ -1,6 +1,6 @@
-import { Box, Heading, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import { FC } from "react";
-import { TTMonoBold, TTMonoReg } from "../../theme/utils/fonts";
+import { TTMonoBold } from "../../theme/utils/fonts";
 
 interface TLDRProps {
   title?: string;

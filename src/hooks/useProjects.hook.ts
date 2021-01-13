@@ -1,6 +1,6 @@
-import { immer } from "./utils.hooks";
 import create from "zustand";
 import { ProjectType } from "../shared/types";
+import { immer } from "./utils.hooks";
 
 type WorkPageProject = ProjectType | "all";
 

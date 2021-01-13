@@ -1,5 +1,5 @@
-import * as React from "react";
 import { SimpleGrid } from "@chakra-ui/react";
+import * as React from "react";
 import { IPost } from "../../shared/types";
 import { BodyWrapper } from "../Common";
 import { Article } from "./Article";

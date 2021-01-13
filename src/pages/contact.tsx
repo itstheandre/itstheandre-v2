@@ -7,11 +7,8 @@ import {
   FormLabel,
   Input,
   useColorMode,
-  Textarea,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { sendForm } from "../service";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   CustomToast,
@@ -20,10 +17,9 @@ import {
   PageHero,
   PageIntro,
 } from "../components";
+import { sendForm } from "../service";
 import { TTMonoBold, TTRegBold } from "../theme/utils/fonts";
 import { defaultContactForm, IContactForm } from "../utils";
-import validator from "validator";
-import { useMediaQuery } from "@solx/use-media-query";
 
 export default function Contact() {
   const { colorMode } = useColorMode();

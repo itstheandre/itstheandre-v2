@@ -1,9 +1,9 @@
-import { Box, useColorMode, useDisclosure } from "@chakra-ui/react";
+import { useColorMode, useDisclosure } from "@chakra-ui/react";
 import { createContext, FC, useContext } from "react";
+import { MDXWrapper } from "../../theme/custom/MDX.comps";
 import { StrokerBox } from "../../theme/custom/stroker.div";
 import { Main } from "./Main";
 import { Nav } from "./Nav";
-import { MDXWrapper } from "../../theme/custom/MDX.comps";
 
 interface LayoutProps {
   children: React.ReactNode;

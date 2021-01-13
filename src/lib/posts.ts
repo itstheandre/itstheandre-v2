@@ -1,6 +1,6 @@
 import fs from "fs";
-import path, { join } from "path";
 import matter from "gray-matter";
+import path, { join } from "path";
 import readingTime from "reading-time";
 import { IPost } from "../shared/types";
 
