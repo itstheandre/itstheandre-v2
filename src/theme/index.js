@@ -31,6 +31,7 @@ export const MyStroke = ({ children }) => (
     {children}
   </Text>
 );
+export * from "./custom/ArticleBox";
 
 // baseStyle: {
 //   fontWeight: "bold",

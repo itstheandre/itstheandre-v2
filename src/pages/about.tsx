@@ -157,9 +157,9 @@ export default function About() {
           px={{ xl: "7em" }}
           justifyContent="center"
         >
-          <AboutWrapper emoji="🇳🇱" title="Living in Amsterdam">
-            Currently living in my 4th European capital, after Berlin, Paris and
-            Lisbon"
+          <AboutWrapper emoji="🇳🇱" title="Intersted in Amsterdam">
+            Currently looking to move to my 4th European capital, after Berlin,
+            Paris and Lisbon"
           </AboutWrapper>
           <AboutWrapper emoji="💻" title="1.5 years experience">
             Been coding for 1.5 years working and teaching code, while

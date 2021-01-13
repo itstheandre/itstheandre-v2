@@ -3,6 +3,7 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/nightOwl";
 import { Pre, CopyCode, LineNo } from "./styles";
 import { copyToClipboard } from "../../../../utils";
+import { Box } from "@chakra-ui/react";
 
 export function Code({ codeString, language, ...props }) {
   //   if (props["react-live"]) {
@@ -31,26 +32,30 @@ export function Code({ codeString, language, ...props }) {
     copyToClipboard(codeString);
   }
   return (
-    <Highlight
-      {...defaultProps}
-      code={codeString}
-      language={language}
-      theme={theme}
-      {...props}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Pre className={className} style={style}>
-          <CopyCode onClick={handleClick}>Copy</CopyCode>
-          {tokens.map((line, i) => (
-            <div {...getLineProps({ line, key: i })}>
-              <LineNo>{i + 1}</LineNo>
-              {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
+    // <Box py="3" whiteSpace="pre-wrap">
+      <Highlight
+        {...defaultProps}
+        code={codeString}
+        language={language}
+        theme={theme}
+        {...props}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          // <Box whiteSpace="pre-wrap">
+            <Pre className={className} style={style}>
+              <CopyCode onClick={handleClick}>Copy</CopyCode>
+              {tokens.map((line, i) => (
+                <div {...getLineProps({ line, key: i })}>
+                  <LineNo>{i + 1}</LineNo>
+                  {line.map((token, key) => (
+                    <span {...getTokenProps({ token, key })} />
+                  ))}
+                </div>
               ))}
-            </div>
-          ))}
-        </Pre>
-      )}
-    </Highlight>
+            </Pre>
+          // </Box>
+        )}
+      </Highlight>
+    // </Box>
   );
 }

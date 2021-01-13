@@ -21,14 +21,12 @@ function MyApp({ Component, pageProps }) {
         <title>André de Albuquerque</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {process.env.NODE_ENV === "production" ? <div /> : (
-        
+
       <Layout>
         <Component {...pageProps} />
         {/* <MDXProvider components={components}> */}
         {/* </MDXProvider> */}
       </Layout>
-      )}
     </ChakraProvider>
   );
 }

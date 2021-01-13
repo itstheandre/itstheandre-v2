@@ -16,11 +16,10 @@ import { getSortedPosts } from "../lib/posts";
 
 interface HomeProps {
   projects: IProject[];
-  posts: IPost[];
+  posts?: IPost[];
 }
 
 export default function Home({ projects, posts }: HomeProps) {
-  console.log("posts:", posts);
   return (
     <div>
       <Head>
@@ -29,19 +28,21 @@ export default function Home({ projects, posts }: HomeProps) {
       <PageHeader homePage>
         <PageIntro>Hello 👋</PageIntro>
         <PageHero>
-          <Text as="span" className="strokerText stroke">
-            I'm André
-          </Text>{" "}
+          <NextLink href="/about">
+            <Text as="span" className="strokerText stroke">
+              I'm André
+            </Text>{" "}
+          </NextLink>
           and I am a full stack developer. I have an{" "}
           <Text textDecor="line-through" as="span">
             un
           </Text>
           healthy obsession with code, to the point that I am continuously{" "}
           {/* <MyStroke>tinkering</MyStroke>,{" "} */}
-          <NextLink href="/blog">
+          {/* <NextLink href="/blog">
             <MyStroke>writing</MyStroke>
           </NextLink>
-          , or{" "}
+          , or{" "} */}
           <NextLink href="/work">
             <MyStroke>building</MyStroke>
           </NextLink>{" "}
@@ -68,7 +69,7 @@ export default function Home({ projects, posts }: HomeProps) {
         </NextLink>
       </Flex>
 
-      <Box as="section" mt="48">
+      {/* <Box as="section" mt="48">
         <Heading
           as="h2"
           variant="mono"
@@ -90,7 +91,7 @@ export default function Home({ projects, posts }: HomeProps) {
             </Button>
           </NextLink>
         </Flex>
-      </Box>
+      </Box> */}
 
       <LetsWork />
     </div>
@@ -99,12 +100,12 @@ export default function Home({ projects, posts }: HomeProps) {
 
 export async function getStaticProps() {
   const projects = getSortedProjects(3);
-  const posts = getSortedPosts(3);
+  // const posts = getSortedPosts(3);
 
   return {
     props: {
       projects,
-      posts,
+      // posts,
     },
   };
 }

@@ -5,7 +5,6 @@ import {
   Flex,
   Grid,
   Heading,
-  HStack,
   SimpleGrid,
   Text,
   useColorMode,
@@ -36,7 +35,7 @@ export const AboutTechnologies = () => {
           to master
         </Text>
       </Box>
-      <HStack
+      <Wrap
         mt={12}
         justify="center"
         ml={{ md: "auto" }}
@@ -45,49 +44,61 @@ export const AboutTechnologies = () => {
         spacing="18px"
         fontSize="0"
       >
-        <Badge
-          d="flex"
-          variant={techUsed === "all" ? "selected" : "unselected"}
-          onClick={() => setTechUsed("all")}
-        >
-          All
-        </Badge>
-        <Badge
-          d="flex"
-          variant={techUsed === "frontend" ? "selected" : "unselected"}
-          onClick={() => setTechUsed("frontend")}
-        >
-          Front-End
-        </Badge>
-        <Badge
-          d="flex"
-          variant={techUsed === "backend" ? "selected" : "unselected"}
-          onClick={() => setTechUsed("backend")}
-        >
-          Back-End
-        </Badge>
-        <Badge
-          d="flex"
-          variant={techUsed === "framework" ? "selected" : "unselected"}
-          onClick={() => setTechUsed("framework")}
-        >
-          Framework
-        </Badge>
-        <Badge
-          d="flex"
-          variant={techUsed === "lib" ? "selected" : "unselected"}
-          onClick={() => setTechUsed("lib")}
-        >
-          Library
-        </Badge>
-        <Badge
-          d="flex"
-          variant={techUsed === "language" ? "selected" : "unselected"}
-          onClick={() => setTechUsed("language")}
-        >
-          Language
-        </Badge>
-      </HStack>
+        <WrapItem>
+          <Badge
+            d="flex"
+            variant={techUsed === "all" ? "selected" : "unselected"}
+            onClick={() => setTechUsed("all")}
+          >
+            All
+          </Badge>
+        </WrapItem>
+        <WrapItem>
+          <Badge
+            d="flex"
+            variant={techUsed === "frontend" ? "selected" : "unselected"}
+            onClick={() => setTechUsed("frontend")}
+          >
+            Front-End
+          </Badge>
+        </WrapItem>
+        <WrapItem>
+          <Badge
+            d="flex"
+            variant={techUsed === "backend" ? "selected" : "unselected"}
+            onClick={() => setTechUsed("backend")}
+          >
+            Back-End
+          </Badge>
+        </WrapItem>
+        <WrapItem>
+          <Badge
+            d="flex"
+            variant={techUsed === "framework" ? "selected" : "unselected"}
+            onClick={() => setTechUsed("framework")}
+          >
+            Framework
+          </Badge>
+        </WrapItem>
+        <WrapItem>
+          <Badge
+            d="flex"
+            variant={techUsed === "lib" ? "selected" : "unselected"}
+            onClick={() => setTechUsed("lib")}
+          >
+            Library
+          </Badge>
+        </WrapItem>
+        <WrapItem>
+          <Badge
+            d="flex"
+            variant={techUsed === "language" ? "selected" : "unselected"}
+            onClick={() => setTechUsed("language")}
+          >
+            Language
+          </Badge>
+        </WrapItem>
+      </Wrap>
 
       <Wrap spacing="24px" justify="center" mt={16}>
         {MyIcons.filter((el) =>
