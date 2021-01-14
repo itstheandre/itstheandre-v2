@@ -17,6 +17,7 @@ import Head from "next/head";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
 import {
+  ClientTeam,
   DecoratedLink,
   EmojiWrapper,
   NextLink,
@@ -25,6 +26,7 @@ import {
   Project,
 } from "../../components";
 import { TLDR } from "../../components/MDXComps";
+import { useIsMedium } from "../../hooks";
 import { getAllProjectSlugs, getProjectData } from "../../lib/projects";
 import { IProject } from "../../shared/types";
 import { TTMonoBold } from "../../theme/utils/fonts";
@@ -45,20 +47,16 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
   source,
   frontMatter,
 }) => {
+  console.log("frontMatter:", frontMatter);
   const router = useRouter();
 
+  const isMedium = useIsMedium();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
-  // console.log("source:", source);
-  // console.log("frontMatter:", frontMatter);
-  // console.log("source:", source);
   const content = hydrate(source, { components });
 
-  // if (true) {
-  //   return <h1>Loading ...</h1>;
-  // }
   return (
     <>
       <Head>
@@ -67,7 +65,13 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
       <Box>
         <Box mt="20" px={{ xl: "7em" }}>
           <PageIntro>{frontMatter.category}</PageIntro>
-          <PageHero>{frontMatter.shortDescription}</PageHero>
+          <Box
+            d={{ base: "block", md: "flex" }}
+            justifyContent={{ base: "", md: "space-between" }}
+          >
+            <PageHero>{frontMatter.shortDescription}</PageHero>
+            {isMedium && <ClientTeam {...frontMatter} />}
+          </Box>
           <Wrap spacing="3" mt="6" justify="left">
             {frontMatter.technologies.map((el) => (
               <WrapItem key={el}>
@@ -76,7 +80,7 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
             ))}
           </Wrap>
         </Box>
-        <Box mt="20">
+        <Box mt="20" borderRadius="10px" overflow="hidden">
           <NextImage
             src={frontMatter.banner}
             layout="responsive"
@@ -85,24 +89,7 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
             objectFit="cover"
           />
         </Box>
-        <Grid gridTemplateColumns="1fr 1fr" mt="6" mx={{ xl: "7em" }}>
-          <GridItem>
-            <Box>
-              <Heading as="h6" mb="1" fontSize="sm" fontFamily={TTMonoBold}>
-                Client
-              </Heading>
-              <NextLink href={frontMatter.url}>{frontMatter.title}</NextLink>
-            </Box>
-          </GridItem>
-          <GridItem>
-            <Box>
-              <Heading as="h6" mb="1" fontSize="sm" fontFamily={TTMonoBold}>
-                Team
-              </Heading>
-              <NextLink href="https://github.com">Dalina Weidinger</NextLink>
-            </Box>
-          </GridItem>
-        </Grid>
+        {!isMedium && <ClientTeam {...frontMatter} />}
         <Flex justify="center" mb="20" mt="10">
           <NextLink
             href={frontMatter.url}

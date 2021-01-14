@@ -4,6 +4,10 @@ import {
   Heading,
   Text,
   useColorMode,
+  List,
+  ListItem,
+  UnorderedList,
+  ListIcon,
 } from "@chakra-ui/react";
 import { NextLink } from "../../../components";
 
@@ -20,7 +24,7 @@ export const mdxComponents = {
   h2: (props) => <Heading as="h2" {...props} />,
   h5: (props) => <Heading as="h5" {...props} />,
   h3: (props) => (
-    <Heading as="h3" {...props} mb="4" mt="10" fontSize={{ base: "md" }} />
+    <Heading as="h3" {...props} mb="4" mt="10" fontSize={{ base: "lg" }} />
   ),
   a: (props) => <NextLink textDecor="underline" {...props} />,
   h4: (props) => (
@@ -37,5 +41,24 @@ export const mdxComponents = {
         />
       );
     }
+  },
+  ul: (props) => {
+    console.log("props:", props);
+    return (
+      <UnorderedList
+        listStyleType="none"
+        listStylePos="inside"
+        ml={0}
+        pl={0}
+        {...props}
+      />
+    );
+  },
+  li: (props) => {
+    return (
+      <ListItem {...props} _before={{ content: '"👉"', pr: 2 }} mb={4}>
+        <Text as="span">{props.children}</Text>
+      </ListItem>
+    );
   },
 };
