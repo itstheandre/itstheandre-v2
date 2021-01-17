@@ -3,6 +3,7 @@ import { useColorMode } from "@chakra-ui/react";
 import { FC } from "react";
 import { MyIconProps } from "./interface";
 import { clean } from "./util";
+//
 
 export const ChakraIcon: FC<MyIconProps> = ({ ...props }) => {
   const { title, ariaLabel, myDesc } = clean(props);

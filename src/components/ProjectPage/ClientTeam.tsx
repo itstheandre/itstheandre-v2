@@ -24,7 +24,10 @@ export function ClientTeam({ url, title, team }: ClientTeamProps) {
     return (
       <>
         {" "}
-        <NextLink href={el.url}>{el.name}</NextLink>,{" "}
+        <NextLink href={el.url} isExternal>
+          {el.name}
+        </NextLink>
+        ,{" "}
       </>
     );
   });
