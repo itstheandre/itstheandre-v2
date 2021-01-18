@@ -25,7 +25,7 @@ export const MdNav = () => {
           return (
             <MenuLink
               colormode={colorMode}
-              isrightpage={isRightPage}
+              isrightpage={isRightPage.toString()}
               key={el.url}
               pos="relative"
               textAlign="center"

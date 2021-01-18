@@ -1,14 +1,4 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
+import { Badge, Box, Heading, Wrap, WrapItem } from "@chakra-ui/react";
 import matter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import hydrate from "next-mdx-remote/hydrate";
@@ -17,6 +7,7 @@ import Head from "next/head";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
 import {
+  CheckItOutButton,
   ClientTeam,
   DecoratedLink,
   EmojiWrapper,
@@ -29,7 +20,6 @@ import { TLDR } from "../../components/MDXComps";
 import { useIsMedium } from "../../hooks";
 import { getAllProjectSlugs, getProjectData } from "../../lib/projects";
 import { IProject } from "../../shared/types";
-import { TTMonoBold } from "../../theme/utils/fonts";
 
 const components = {
   TLDR,
@@ -63,53 +53,45 @@ const IndividualProjects: NextPage<IndividualProjectProps> = ({
         <title>André de Albuquerque - {frontMatter.category}</title>
       </Head>
       <Box>
-        <Box mt="20" px={{ xl: "7em" }}>
-          <PageIntro>{frontMatter.category}</PageIntro>
-          <Box
-            d={{ base: "block", md: "flex" }}
-            justifyContent={{ base: "", md: "space-between" }}
-          >
-            <PageHero>{frontMatter.shortDescription}</PageHero>
-            {isMedium && <ClientTeam {...frontMatter} />}
+        <Box>
+          <Box mt="20" px={{ xl: "7em" }}>
+            <PageIntro>{frontMatter.category}</PageIntro>
+            <Box
+              d={{ base: "block", md: "flex" }}
+              justifyContent={{ base: "", md: "space-between" }}
+            >
+              <PageHero>{frontMatter.shortDescription}</PageHero>
+              <ClientTeam {...frontMatter} d={{ base: "none", md: "block" }} />
+              {/* {isMedium && <ClientTeam {...frontMatter} />} */}
+            </Box>
+            <Wrap spacing="3" mt="6" justify="left">
+              {frontMatter.technologies.map((el) => (
+                <WrapItem key={el}>
+                  <Badge _hover={{ cursor: "default" }}>{el}</Badge>
+                </WrapItem>
+              ))}
+            </Wrap>
           </Box>
-          <Wrap spacing="3" mt="6" justify="left">
-            {frontMatter.technologies.map((el) => (
-              <WrapItem key={el}>
-                <Badge _hover={{ cursor: "default" }}>{el}</Badge>
-              </WrapItem>
-            ))}
-          </Wrap>
+          <Box mt="20" borderRadius="10px" overflow="hidden">
+            <NextImage
+              src={frontMatter.banner}
+              layout="responsive"
+              width={600}
+              height={400}
+              objectFit="cover"
+            />
+          </Box>
+          {/* {!isMedium && <ClientTeam {...frontMatter} />} */}
+          <ClientTeam {...frontMatter} d={{ base: "block", md: "none" }} />
+          <CheckItOutButton url={frontMatter.url} />
         </Box>
-        <Box mt="20" borderRadius="10px" overflow="hidden">
-          <NextImage
-            src={frontMatter.banner}
-            layout="responsive"
-            width={600}
-            height={400}
-            objectFit="cover"
-          />
-        </Box>
-        {!isMedium && <ClientTeam {...frontMatter} />}
-        <Flex justify="center" mb="20" mt="10">
-          <NextLink
-            href={frontMatter.url}
-            textDecor="none"
-            _hover={{ textDecor: "none" }}
-            referrerPolicy="no-referrer"
-            isExternal
-          >
-            <Button variant="outline" textAlign="center">
-              Check it out
-            </Button>
-          </NextLink>
-        </Flex>
         <Box
           m="0 auto"
           w={{
             base: "100%",
-            md: `calc(100% / 6 * 4)`,
-            lg: "calc(100% / 8 * 6)",
-            xl: "calc(100% / 12 * 6)",
+            md: `calc(100% / ${6 / 4})`,
+            lg: `calc(100% / ${8 / 6})`,
+            xl: `calc(100% / ${12 / 6})`,
           }}
         >
           {content}

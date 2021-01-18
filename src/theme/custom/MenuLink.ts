@@ -3,12 +3,13 @@ import styled from "@emotion/styled";
 import { gray50, gray900 } from "../utils/custom.colors";
 
 interface MenuLinkProps {
-  isrightpage: boolean;
+  isrightpage: string;
   colormode: ColorMode;
 }
 export const MenuLink = styled(ListItem)<MenuLinkProps>`
   ${({ isrightpage, colormode }) => {
-    if (isrightpage) {
+    console.log("isrightpage:", isrightpage);
+    if (isrightpage === "true") {
       return `
     &::before {
       transform: translateX(-50%);
