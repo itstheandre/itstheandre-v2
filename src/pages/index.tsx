@@ -18,6 +18,7 @@ interface HomeProps {
 }
 
 export default function Home({ projects, posts }: HomeProps) {
+  console.log("PROCESS ENV NODE", process.env.NODE_ENV);
   return (
     <div>
       <Head>
