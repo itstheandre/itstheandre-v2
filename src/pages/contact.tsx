@@ -92,6 +92,7 @@ export default function Contact() {
             py="2"
             pl="2"
             mt="4"
+            autoComplete="off"
             fontFamily={TTRegBold}
             borderBottomColor={colorMode === "dark" ? "white" : "gray.900"}
             fontSize="20px"
@@ -104,10 +105,6 @@ export default function Contact() {
             _focus={{ outline: "none" }}
             name="name"
             ref={register}
-            // ref={register({
-            //   // validate: (str) => (!str ? "This is wrong" : true),
-            // })}
-            // ref={register}
           />
           {/* <FormErrorMessage>
               {errors.name && errors.name.message}
@@ -134,8 +131,8 @@ export default function Contact() {
             ref={register}
             type="text"
             placeholder="Type your email here"
-            autoComplete="off"
             name="email"
+            autoComplete="off"
           />
         </FormControl>
         <FormControl id="message" fontFamily={TTMonoBold} mt="3.5em">
@@ -161,6 +158,7 @@ export default function Contact() {
             _focus={{ outline: "none" }}
             ref={register}
             name="message"
+            autoComplete="off"
           />
           {/* <Textarea
             type="text"

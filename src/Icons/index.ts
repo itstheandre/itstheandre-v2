@@ -115,7 +115,7 @@ export const MyIcons: IconsBase[] = [
   },
   {
     Icon: NextJsIcon,
-    techUsed: ["backend", "frontend", "lib"],
+    techUsed: ["backend", "frontend", "framework"],
     uniquename: "nextJs",
     title: "The NextJs Logo",
   },

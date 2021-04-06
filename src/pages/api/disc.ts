@@ -44,6 +44,7 @@ export default async function Disc(req: Request, res: NextApiResponse) {
     });
     return res.json(true);
   } catch (error) {
+    console.log("error:", error);
     console.log("error:", error.response);
     // console.log("error:", error);
     return res.status(500).end();

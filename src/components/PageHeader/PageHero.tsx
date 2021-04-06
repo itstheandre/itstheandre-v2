@@ -5,7 +5,7 @@ export const PageHero: FC = ({ children }) => (
   <Heading
     as="h2"
     fontSize={{ base: "2xl", sm: "3xl", lg: "4xl", xl: "5xl" }}
-    w={{ base: "100%", md: "80%" }}
+    w={{ base: "100%" }}
   >
     {children}
   </Heading>
