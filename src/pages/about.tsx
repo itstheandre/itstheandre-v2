@@ -17,6 +17,7 @@ import {
 } from "../components";
 import { useIsMedium } from "../hooks";
 import { GithubIcon, LinkedinIcon } from "../Icons";
+//
 
 export default function About() {
   const { colorMode } = useColorMode();
